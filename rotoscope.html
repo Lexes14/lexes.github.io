@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-Minute Video Rotoscope</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f0ece4;
+            --ink: #151821;
+            --muted: #4f5a6b;
+            --card: rgba(255, 255, 255, 0.84);
+            --line: rgba(21, 24, 33, 0.14);
+            --accent: #ff6b3d;
+            --accent-2: #2f8cff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Manrope", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 12% 8%, rgba(255, 107, 61, 0.27), transparent 35%),
+                radial-gradient(circle at 88% 16%, rgba(47, 140, 255, 0.25), transparent 32%),
+                linear-gradient(160deg, #f8f4ed, var(--bg));
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+            background: rgba(250, 248, 243, 0.78);
+        }
+
+        .header-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.95rem 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.9rem;
+        }
+
+        .brand {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 1.7rem;
+            letter-spacing: 0.06em;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: var(--ink);
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.52rem 0.92rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            color: white;
+            background: linear-gradient(95deg, var(--accent), #ff9964);
+            border-color: transparent;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.2rem 3rem;
+            display: grid;
+            gap: 1.4rem;
+        }
+
+        .hero {
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: var(--card);
+            box-shadow: 0 18px 30px rgba(43, 42, 40, 0.08);
+            padding: 1.4rem;
+            animation: rise 0.8s ease both;
+        }
+
+        .hero h1 {
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 0.04em;
+            line-height: 0.95;
+            font-size: clamp(2.1rem, 6vw, 4rem);
+            margin-bottom: 0.6rem;
+        }
+
+        .hero p {
+            color: var(--muted);
+            max-width: 780px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.08fr 0.92fr;
+            gap: 1rem;
+        }
+
+        .panel {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: var(--card);
+            padding: 1rem;
+            box-shadow: 0 14px 24px rgba(44, 44, 44, 0.07);
+        }
+
+        .panel h2 {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.7rem;
+        }
+
+        .weeks {
+            display: grid;
+            gap: 0.8rem;
+            max-height: 860px;
+            overflow-y: auto;
+            padding-right: 0.15rem;
+        }
+
+        .week {
+            border: 1px solid rgba(47, 140, 255, 0.25);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 0.8rem;
+        }
+
+        .week h3 {
+            font-size: 1rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .week a {
+            display: inline-block;
+            color: var(--accent-2);
+            text-decoration: none;
+            margin-bottom: 0.42rem;
+            font-weight: 700;
+        }
+
+        .week a:hover {
+            text-decoration: underline;
+        }
+
+        .week ol {
+            padding-left: 1.1rem;
+            color: #2f3440;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(150px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .tutorial-card {
+            border: 1px solid rgba(255, 107, 61, 0.32);
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+            animation: rise 0.8s ease both;
+        }
+
+        .tutorial-card img {
+            width: 100%;
+            height: 122px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .tutorial-card .info {
+            padding: 0.58rem;
+        }
+
+        .tutorial-card h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .tutorial-card p {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.35;
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+         @media (max-width: 980px) {
+             .content-grid {
+                 grid-template-columns: 1fr;
+             }
+
+             .weeks {
+                 max-height: none;
+             }
+         }
+
+         @media (max-width: 640px) {
+             .tutorial-grid {
+                 grid-template-columns: 1fr;
+             }
+
+             .brand {
+                 font-size: 1.45rem;
+             }
+         }
+     </style>
+ </head>
+ <body>
+     <header>
+         <div class="header-wrap">
+             <div class="brand">Rotoscope Project Log</div>
+             <nav>
+                 <a class="nav-btn" href="index.html">3D Solar System</a>
+                 <a class="nav-btn active" href="rotoscope.html">1-Minute Video Rotoscope</a>
+             </nav>
+         </div>
+     </header>
+
+     <main>
+         <section class="hero">
+             <h1>1-Minute Video Rotoscope</h1>
+             <p>
+                 Weekly production breakdown from Week 1 to Week 12 with step-by-step mini tutorials,
+                 YouTube references, and 8 panel guides with visual examples.
+             </p>
+         </section>
+
+         <section class="content-grid">
+             <article class="panel">
+                 <h2>Weekly Progress (Week 1-12)</h2>
+                 <div class="weeks">
+                     <div class="week">
+                         <h3>Week 1: Concept and Storyboard</h3>
+                         <a href="https://www.youtube.com/watch?v=9No-FiEInLA" target="_blank" rel="noopener">Watch Week 1 Guide</a>
+                         <ol>
+                             <li>Choose a 1-minute story idea.</li>
+                             <li>Create thumbnail storyboard frames.</li>
+                             <li>Define key actions and camera angles.</li>
+                         </ol>
+                     </div>
+                     <div class="week">
+                         <h3>Week 2: Video Shoot Planning</h3>
+                         <a href="https://www.youtube.com/watch?v=F6QY9M4W1fQ" target="_blank" rel="noopener">Watch Week 2 Guide</a>
+                         <ol>
+                             <li>Prepare a shot list for every scene.</li>
+                             <li>Set lighting and background consistency.</li>
+                             <li>Record reference footage in stable framing.</li>
+                         </ol>
+                     </div>
+                     <div class="week">
+                         <h3>Week 3: Frame Extraction</h3>
+                         <a href="https://www.youtube.com/watch?v=rHzvfy9VqPc" target="_blank" rel="noopener">Watch Week 3 Guide</a>
+                         <ol>
+                             <li>Import video into editing software.</li>
+                             <li>Export frames at selected intervals.</li>
+                             <li>Organize files by scene and frame number.</li>
+                         </ol>
+                     </div>
+                     <div class="week">
+                         <h3>Week 4: Base Drawing Pass</h3>
+                         <a href="https://www.youtube.com/watch?v=9R9BY7k-6gA" target="_blank" rel="noopener">Watch Week 4 Guide</a>
+                         <ol>
+                             <li>Draw simple outlines over extracted frames.</li>
+                             <li>Focus on silhouette and proportion.</li>
+                             <li>Check smoothness between adjacent frames.</li>
+                         </ol>
+                     </div>
+                     <div class="week">
+                         <h3>Week 5: Clean Line Work</h3>
+                         <a href="https://www.youtube.com/watch?v=Q7M8J0xN8mY" target="_blank" rel="noopener">Watch Week 5 Guide</a>
+                         <ol>
+                             <li>Refine rough strokes into clean lines.</li>
+                             <li>Use consistent brush settings.</li>
+                             <li>Fix jitter and shape inconsistencies.</li>
+                         </ol>
+                     </div>
+                     <div class="week">
+                         <h3>Week 6: Color Blocking</h3>
+                         <a href="https://www.youtube.com/watch?v=9wYx6f2i6iY" target="_blank" rel="noopener">Watch Week 6 Guide</a>
+                         <ol>
+                             <li>Create palette for characters and props.</li>
+                             <li>Fill major shapes with flat colors.</li>
+                             <li>Maintain frame-to-frame color consistency.</li>
+                         </ol>
+                     </div>
+                     <div class="week">
+                         <h3>Week 7: Shading and Highlights</h3>
+                         <a href="https://www.youtube.com/watch?v=2B7i5xK5f7w" target="_blank" rel="noopener">Watch Week 7 Guide</a>
+                         <ol>
+                             <li>Define one clear light direction.</li>
+                             <li>Add shadows to create depth.</li>
+                             <li>Apply highlights on key surfaces.</li>
+                         </ol>
+                     </div>
+                     <div class="week">
+                         <h3>Week 8: Background Integration</h3>
+                         <a href="https://www.youtube.com/watch?v=2X3x3v2A3Pc" target="_blank" rel="noopener">Watch Week 8 Guide</a>
+                         <ol>
+                             <li>Paint or compose background elements.</li>
+                             <li>Match perspective and horizon lines.</li>
+                             <li>Blend character edges with environment.</li>
+                         </ol>
+                     </div>
+                     <div class="week">
+                         <h3>Week 9: In-Between Frames</h3>
+                         <a href="https://www.youtube.com/watch?v=Y8f4Q2NfWzM" target="_blank" rel="noopener">Watch Week 9 Guide</a>
+                         <ol>
+                             <li>Add in-betweens for smoother movement.</li>
+                             <li>Watch timing on fast actions.</li>
+                             <li>Adjust spacing for natural motion arcs.</li>
+                         </ol>
+                     </div>
+                     <div class="week">
+                         <h3>Week 10: Compositing and Effects</h3>
+                         <a href="https://www.youtube.com/watch?v=3T8vY6-7Y4Y" target="_blank" rel="noopener">Watch Week 10 Guide</a>
+                         <ol>
+                             <li>Stack rotoscope layers and masks.</li>
+                             <li>Add subtle glow or grain effects.</li>
+                             <li>Balance contrast and color grade.</li>
+                         </ol>
+                     </div>
+                     <div class="week">
+                         <h3>Week 11: Audio and Final Edit</h3>
+                         <a href="https://www.youtube.com/watch?v=5vVhW7Y2ZgY" target="_blank" rel="noopener">Watch Week 11 Guide</a>
+                         <ol>
+                             <li>Sync soundtrack and sound effects.</li>
+                             <li>Trim sequences to exactly one minute.</li>
+                             <li>Export a high-quality preview.</li>
+                         </ol>
+                     </div>
+                     <div class="week">
+                         <h3>Week 12: Review and Publish</h3>
+                         <a href="https://www.youtube.com/watch?v=JmR5l7x8Wpw" target="_blank" rel="noopener">Watch Week 12 Guide</a>
+                         <ol>
+                             <li>Collect critique and check pacing.</li>
+                             <li>Fix final technical and artistic issues.</li>
+                             <li>Render and publish your final cut.</li>
+                         </ol>
+                     </div>
+                 </div>
+             </article>
+
+             <aside class="panel">
+                 <h2>8 Tutorial Panels</h2>
+                 <div class="tutorial-grid">
+                     <article class="tutorial-card" style="animation-delay:0.05s">
+                         <img src="https://picsum.photos/seed/roto1/400/260" alt="Panel 1 storyboard sketch">
+                         <div class="info">
+                             <h3>Panel 1: Story Beats</h3>
+                             <p>Map scene flow and transition points before drawing starts.</p>
+                         </div>
+                     </article>
+                     <article class="tutorial-card" style="animation-delay:0.1s">
+                         <img src="https://picsum.photos/seed/roto2/400/260" alt="Panel 2 camera setup">
+                         <div class="info">
+                             <h3>Panel 2: Camera Setup</h3>
+                             <p>Lock framing and lighting to avoid frame-to-frame mismatch.</p>
+                         </div>
+                     </article>
+                     <article class="tutorial-card" style="animation-delay:0.15s">
+                         <img src="https://picsum.photos/seed/roto3/400/260" alt="Panel 3 frame extraction">
+                         <div class="info">
+                             <h3>Panel 3: Frame Extraction</h3>
+                             <p>Export clean frame sequences and label them in order.</p>
+                         </div>
+                     </article>
+                     <article class="tutorial-card" style="animation-delay:0.2s">
+                         <img src="https://picsum.photos/seed/roto4/400/260" alt="Panel 4 rough line pass">
+                         <div class="info">
+                             <h3>Panel 4: Rough Pass</h3>
+                             <p>Trace core shape and body mechanics with loose lines.</p>
+                         </div>
+                     </article>
+                     <article class="tutorial-card" style="animation-delay:0.25s">
+                         <img src="https://picsum.photos/seed/roto5/400/260" alt="Panel 5 cleanup process">
+                         <div class="info">
+                             <h3>Panel 5: Cleanup</h3>
+                             <p>Refine outlines and keep stroke thickness consistent.</p>
+                         </div>
+                     </article>
+                     <article class="tutorial-card" style="animation-delay:0.3s">
+                         <img src="https://picsum.photos/seed/roto6/400/260" alt="Panel 6 color and shadows">
+                         <div class="info">
+                             <h3>Panel 6: Color Pass</h3>
+                             <p>Apply flat colors first, then build shadows and highlights.</p>
+                         </div>
+                     </article>
+                     <article class="tutorial-card" style="animation-delay:0.35s">
+                         <img src="https://picsum.photos/seed/roto7/400/260" alt="Panel 7 compositing layers">
+                         <div class="info">
+                             <h3>Panel 7: Compositing</h3>
+                             <p>Blend character, FX, and background with matching tone.</p>
+                         </div>
+                     </article>
+                     <article class="tutorial-card" style="animation-delay:0.4s">
+                         <img src="https://picsum.photos/seed/roto8/400/260" alt="Panel 8 final render export">
+                         <div class="info">
+                             <h3>Panel 8: Final Export</h3>
+                             <p>Check timing, audio sync, and output a polished 60-second cut.</p>
+                         </div>
+                     </article>
+                 </div>
+             </aside>
+         </section>
+     </main>
+ </body>
+ </html>
