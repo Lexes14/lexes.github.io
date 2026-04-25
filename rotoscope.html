@@ -136,43 +136,67 @@
             margin-bottom: 0.7rem;
         }
 
-        .weeks {
+        .week-selector {
             display: grid;
-            gap: 0.8rem;
-            max-height: 860px;
-            overflow-y: auto;
-            padding-right: 0.15rem;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.55rem;
+            margin-bottom: 0.9rem;
         }
 
-        .week {
-            border: 1px solid rgba(47, 140, 255, 0.25);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 0.8rem;
-        }
-
-        .week h3 {
-            font-size: 1rem;
-            margin-bottom: 0.35rem;
-        }
-
-        .week a {
-            display: inline-block;
-            color: var(--accent-2);
-            text-decoration: none;
-            margin-bottom: 0.42rem;
+        .week-chip {
+            border: 1px solid rgba(47, 140, 255, 0.3);
+            background: rgba(255, 255, 255, 0.82);
+            border-radius: 999px;
+            padding: 0.48rem 0.56rem;
+            font-size: 0.82rem;
             font-weight: 700;
+            color: #263047;
+            cursor: pointer;
+            transition: 0.18s ease;
         }
 
-        .week a:hover {
-            text-decoration: underline;
+        .week-chip:hover,
+        .week-chip.active {
+            color: #fff;
+            background: linear-gradient(96deg, var(--accent-2), #61a9ff);
+            border-color: transparent;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(47, 140, 255, 0.24);
         }
 
-        .week ol {
-            padding-left: 1.1rem;
-            color: #2f3440;
-            font-size: 0.92rem;
-            line-height: 1.5;
+        .youtube-panel {
+            border: 1px solid rgba(47, 140, 255, 0.24);
+            border-radius: 14px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .youtube-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.7rem;
+            padding: 0.75rem 0.85rem;
+            background: linear-gradient(95deg, rgba(47, 140, 255, 0.13), rgba(255, 107, 61, 0.14));
+            border-bottom: 1px solid rgba(47, 140, 255, 0.22);
+        }
+
+        .youtube-top strong {
+            font-size: 0.95rem;
+        }
+
+        .youtube-top a {
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--accent-2);
+        }
+
+        .youtube-frame {
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            border: 0;
+            display: block;
         }
 
         .tutorial-grid {
@@ -227,12 +251,16 @@
                  grid-template-columns: 1fr;
              }
 
-             .weeks {
-                 max-height: none;
+             .week-selector {
+                 grid-template-columns: repeat(3, minmax(0, 1fr));
              }
          }
 
          @media (max-width: 640px) {
+             .week-selector {
+                 grid-template-columns: repeat(2, minmax(0, 1fr));
+             }
+
              .tutorial-grid {
                  grid-template-columns: 1fr;
              }
@@ -258,123 +286,43 @@
          <section class="hero">
              <h1>1-Minute Video Rotoscope</h1>
              <p>
-                 Weekly production breakdown from Week 1 to Week 12 with step-by-step mini tutorials,
-                 YouTube references, and 8 panel guides with visual examples.
+                 Weekly progress from Week 1 to Week 12 with an interactive YouTube panel,
+                 plus 8 visual tutorial panels.
              </p>
          </section>
 
          <section class="content-grid">
              <article class="panel">
                  <h2>Weekly Progress (Week 1-12)</h2>
-                 <div class="weeks">
-                     <div class="week">
-                         <h3>Week 1: Concept and Storyboard</h3>
-                        <a href="https://youtu.be/Unz0zwXVbjc" target="_blank" rel="noopener">Watch Week 1 Guide</a>
-                         <ol>
-                             <li>Choose a 1-minute story idea.</li>
-                             <li>Create thumbnail storyboard frames.</li>
-                             <li>Define key actions and camera angles.</li>
-                         </ol>
+                 <div class="week-selector" id="weekSelector">
+                     <button class="week-chip active" data-week="Week 1" data-video="https://youtu.be/Unz0zwXVbjc" type="button">Week 1</button>
+                     <button class="week-chip" data-week="Week 2" data-video="https://www.youtube.com/watch?v=F6QY9M4W1fQ" type="button">Week 2</button>
+                     <button class="week-chip" data-week="Week 3" data-video="https://www.youtube.com/watch?v=rHzvfy9VqPc" type="button">Week 3</button>
+                     <button class="week-chip" data-week="Week 4" data-video="https://www.youtube.com/watch?v=9R9BY7k-6gA" type="button">Week 4</button>
+                     <button class="week-chip" data-week="Week 5" data-video="https://www.youtube.com/watch?v=Q7M8J0xN8mY" type="button">Week 5</button>
+                     <button class="week-chip" data-week="Week 6" data-video="https://www.youtube.com/watch?v=9wYx6f2i6iY" type="button">Week 6</button>
+                     <button class="week-chip" data-week="Week 7" data-video="https://www.youtube.com/watch?v=2B7i5xK5f7w" type="button">Week 7</button>
+                     <button class="week-chip" data-week="Week 8" data-video="https://www.youtube.com/watch?v=2X3x3v2A3Pc" type="button">Week 8</button>
+                     <button class="week-chip" data-week="Week 9" data-video="https://www.youtube.com/watch?v=Y8f4Q2NfWzM" type="button">Week 9</button>
+                     <button class="week-chip" data-week="Week 10" data-video="https://www.youtube.com/watch?v=3T8vY6-7Y4Y" type="button">Week 10</button>
+                     <button class="week-chip" data-week="Week 11" data-video="https://www.youtube.com/watch?v=5vVhW7Y2ZgY" type="button">Week 11</button>
+                     <button class="week-chip" data-week="Week 12" data-video="https://www.youtube.com/watch?v=JmR5l7x8Wpw" type="button">Week 12</button>
+                 </div>
+
+                 <div class="youtube-panel">
+                     <div class="youtube-top">
+                         <strong id="activeWeek">Week 1</strong>
+                         <a id="youtubeLink" href="https://youtu.be/Unz0zwXVbjc" target="_blank" rel="noopener">Open on YouTube</a>
                      </div>
-                     <div class="week">
-                         <h3>Week 2: Video Shoot Planning</h3>
-                         <a href="https://www.youtube.com/watch?v=F6QY9M4W1fQ" target="_blank" rel="noopener">Watch Week 2 Guide</a>
-                         <ol>
-                             <li>Prepare a shot list for every scene.</li>
-                             <li>Set lighting and background consistency.</li>
-                             <li>Record reference footage in stable framing.</li>
-                         </ol>
-                     </div>
-                     <div class="week">
-                         <h3>Week 3: Frame Extraction</h3>
-                         <a href="https://www.youtube.com/watch?v=rHzvfy9VqPc" target="_blank" rel="noopener">Watch Week 3 Guide</a>
-                         <ol>
-                             <li>Import video into editing software.</li>
-                             <li>Export frames at selected intervals.</li>
-                             <li>Organize files by scene and frame number.</li>
-                         </ol>
-                     </div>
-                     <div class="week">
-                         <h3>Week 4: Base Drawing Pass</h3>
-                         <a href="https://www.youtube.com/watch?v=9R9BY7k-6gA" target="_blank" rel="noopener">Watch Week 4 Guide</a>
-                         <ol>
-                             <li>Draw simple outlines over extracted frames.</li>
-                             <li>Focus on silhouette and proportion.</li>
-                             <li>Check smoothness between adjacent frames.</li>
-                         </ol>
-                     </div>
-                     <div class="week">
-                         <h3>Week 5: Clean Line Work</h3>
-                         <a href="https://www.youtube.com/watch?v=Q7M8J0xN8mY" target="_blank" rel="noopener">Watch Week 5 Guide</a>
-                         <ol>
-                             <li>Refine rough strokes into clean lines.</li>
-                             <li>Use consistent brush settings.</li>
-                             <li>Fix jitter and shape inconsistencies.</li>
-                         </ol>
-                     </div>
-                     <div class="week">
-                         <h3>Week 6: Color Blocking</h3>
-                         <a href="https://www.youtube.com/watch?v=9wYx6f2i6iY" target="_blank" rel="noopener">Watch Week 6 Guide</a>
-                         <ol>
-                             <li>Create palette for characters and props.</li>
-                             <li>Fill major shapes with flat colors.</li>
-                             <li>Maintain frame-to-frame color consistency.</li>
-                         </ol>
-                     </div>
-                     <div class="week">
-                         <h3>Week 7: Shading and Highlights</h3>
-                         <a href="https://www.youtube.com/watch?v=2B7i5xK5f7w" target="_blank" rel="noopener">Watch Week 7 Guide</a>
-                         <ol>
-                             <li>Define one clear light direction.</li>
-                             <li>Add shadows to create depth.</li>
-                             <li>Apply highlights on key surfaces.</li>
-                         </ol>
-                     </div>
-                     <div class="week">
-                         <h3>Week 8: Background Integration</h3>
-                         <a href="https://www.youtube.com/watch?v=2X3x3v2A3Pc" target="_blank" rel="noopener">Watch Week 8 Guide</a>
-                         <ol>
-                             <li>Paint or compose background elements.</li>
-                             <li>Match perspective and horizon lines.</li>
-                             <li>Blend character edges with environment.</li>
-                         </ol>
-                     </div>
-                     <div class="week">
-                         <h3>Week 9: In-Between Frames</h3>
-                         <a href="https://www.youtube.com/watch?v=Y8f4Q2NfWzM" target="_blank" rel="noopener">Watch Week 9 Guide</a>
-                         <ol>
-                             <li>Add in-betweens for smoother movement.</li>
-                             <li>Watch timing on fast actions.</li>
-                             <li>Adjust spacing for natural motion arcs.</li>
-                         </ol>
-                     </div>
-                     <div class="week">
-                         <h3>Week 10: Compositing and Effects</h3>
-                         <a href="https://www.youtube.com/watch?v=3T8vY6-7Y4Y" target="_blank" rel="noopener">Watch Week 10 Guide</a>
-                         <ol>
-                             <li>Stack rotoscope layers and masks.</li>
-                             <li>Add subtle glow or grain effects.</li>
-                             <li>Balance contrast and color grade.</li>
-                         </ol>
-                     </div>
-                     <div class="week">
-                         <h3>Week 11: Audio and Final Edit</h3>
-                         <a href="https://www.youtube.com/watch?v=5vVhW7Y2ZgY" target="_blank" rel="noopener">Watch Week 11 Guide</a>
-                         <ol>
-                             <li>Sync soundtrack and sound effects.</li>
-                             <li>Trim sequences to exactly one minute.</li>
-                             <li>Export a high-quality preview.</li>
-                         </ol>
-                     </div>
-                     <div class="week">
-                         <h3>Week 12: Review and Publish</h3>
-                         <a href="https://www.youtube.com/watch?v=JmR5l7x8Wpw" target="_blank" rel="noopener">Watch Week 12 Guide</a>
-                         <ol>
-                             <li>Collect critique and check pacing.</li>
-                             <li>Fix final technical and artistic issues.</li>
-                             <li>Render and publish your final cut.</li>
-                         </ol>
-                     </div>
+                     <iframe
+                         id="youtubeFrame"
+                         class="youtube-frame"
+                         src="https://www.youtube.com/embed/Unz0zwXVbjc"
+                         title="Weekly Progress YouTube Video"
+                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                         referrerpolicy="strict-origin-when-cross-origin"
+                         allowfullscreen>
+                     </iframe>
                  </div>
              </article>
 
@@ -441,5 +389,52 @@
              </aside>
          </section>
      </main>
+
+     <script>
+        (function () {
+            const chips = document.querySelectorAll(".week-chip");
+            const activeWeek = document.getElementById("activeWeek");
+            const youtubeLink = document.getElementById("youtubeLink");
+            const youtubeFrame = document.getElementById("youtubeFrame");
+
+            const toEmbedUrl = (url) => {
+                try {
+                    const parsed = new URL(url);
+                    const host = parsed.hostname.replace("www.", "");
+
+                    if (host === "youtu.be") {
+                        const id = parsed.pathname.slice(1);
+                        return id ? `https://www.youtube.com/embed/${id}` : "";
+                    }
+
+                    if (host === "youtube.com") {
+                        const id = parsed.searchParams.get("v");
+                        return id ? `https://www.youtube.com/embed/${id}` : "";
+                    }
+                } catch (error) {
+                    return "";
+                }
+
+                return "";
+            };
+
+            chips.forEach((chip) => {
+                chip.addEventListener("click", () => {
+                    chips.forEach((item) => item.classList.remove("active"));
+                    chip.classList.add("active");
+
+                    const week = chip.dataset.week;
+                    const video = chip.dataset.video;
+                    const embed = toEmbedUrl(video);
+
+                    activeWeek.textContent = week;
+                    youtubeLink.href = video;
+                    if (embed) {
+                        youtubeFrame.src = embed;
+                    }
+                });
+            });
+        })();
+     </script>
  </body>
  </html>
