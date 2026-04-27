@@ -199,6 +199,42 @@
             display: block;
         }
 
+        .tutorial-player {
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 107, 61, 0.22);
+            border-radius: 14px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .tutorial-player-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.7rem;
+            padding: 0.75rem 0.85rem;
+            background: linear-gradient(95deg, rgba(255, 107, 61, 0.12), rgba(47, 140, 255, 0.13));
+            border-bottom: 1px solid rgba(255, 107, 61, 0.16);
+        }
+
+        .tutorial-player-top strong {
+            font-size: 0.95rem;
+        }
+
+        .tutorial-player-top a {
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .tutorial-frame {
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            border: 0;
+            display: block;
+        }
+
         .tutorial-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(150px, 1fr));
@@ -338,13 +374,28 @@
 
              <aside class="panel">
                  <h2>Step By Step Tutorials</h2>
+                 <div class="tutorial-player">
+                     <div class="tutorial-player-top">
+                         <strong id="tutorialTitle">Select Source Materials</strong>
+                         <a id="tutorialLink" href="https://youtu.be/XmsuKrjB3SI?si=oYQLzS3L2u0ZC2V2" target="_blank" rel="noopener">Open on YouTube</a>
+                     </div>
+                     <iframe
+                         id="tutorialFrame"
+                         class="tutorial-frame"
+                         src="https://www.youtube.com/embed/XmsuKrjB3SI"
+                         title="Select Source Materials Tutorial Video"
+                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                         referrerpolicy="strict-origin-when-cross-origin"
+                         allowfullscreen>
+                     </iframe>
+                 </div>
                  <div class="tutorial-grid">
                      <article class="tutorial-card" style="animation-delay:0.05s">
-                         <a href="https://youtu.be/XmsuKrjB3SI?si=oYQLzS3L2u0ZC2V2" target="_blank" rel="noopener">
+                         <a href="https://youtu.be/XmsuKrjB3SI?si=oYQLzS3L2u0ZC2V2" target="_blank" rel="noopener" data-tutorial-video="https://youtu.be/XmsuKrjB3SI?si=oYQLzS3L2u0ZC2V2" data-tutorial-title="Select Source Materials">
                              <img src="https://img.youtube.com/vi/XmsuKrjB3SI/hqdefault.jpg" alt="Select Source Materials tutorial video thumbnail">
                          </a>
                          <div class="info">
-                             <h3><a href="https://youtu.be/XmsuKrjB3SI?si=oYQLzS3L2u0ZC2V2" target="_blank" rel="noopener">Select Source Materials</a></h3>
+                             <h3><a href="https://youtu.be/XmsuKrjB3SI?si=oYQLzS3L2u0ZC2V2" target="_blank" rel="noopener" data-tutorial-video="https://youtu.be/XmsuKrjB3SI?si=oYQLzS3L2u0ZC2V2" data-tutorial-title="Select Source Materials">Select Source Materials</a></h3>
                              <p>Choosing relevant, credible, and high-quality references (such as books, articles, or datasets) that directly support your topic or objective.</p>
                          </div>
                      </article>
@@ -412,6 +463,10 @@
             const activeWeek = document.getElementById("activeWeek");
             const youtubeLink = document.getElementById("youtubeLink");
             const youtubeFrame = document.getElementById("youtubeFrame");
+            const tutorialTitle = document.getElementById("tutorialTitle");
+            const tutorialLink = document.getElementById("tutorialLink");
+            const tutorialFrame = document.getElementById("tutorialFrame");
+            const tutorialTriggers = document.querySelectorAll("[data-tutorial-video]");
 
             const toEmbedUrl = (url) => {
                 try {
@@ -447,6 +502,26 @@
                     youtubeLink.href = video;
                     if (embed) {
                         youtubeFrame.src = embed;
+                    }
+                });
+            });
+
+            tutorialTriggers.forEach((trigger) => {
+                trigger.addEventListener("click", (event) => {
+                    event.preventDefault();
+
+                    const video = trigger.dataset.tutorialVideo;
+                    const title = trigger.dataset.tutorialTitle || "Tutorial Video";
+                    const embed = toEmbedUrl(video);
+
+                    if (title) {
+                        tutorialTitle.textContent = title;
+                    }
+
+                    tutorialLink.href = video;
+
+                    if (embed) {
+                        tutorialFrame.src = embed;
                     }
                 });
             });
