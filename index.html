@@ -585,7 +585,7 @@
                     <h2 id="calculatorTitle">Calculate Time & Motion in the Solar System</h2>
                     <p>
                         Enter Earth years to see each planet’s equivalent age, revolutions completed,
-                        orbital period, and distance from the Sun. Venus includes the first continuous YouTube video.
+                        orbital period, and distance from the Sun. Planet cards show the YouTube video linked for each world.
                     </p>
                 </div>
 
@@ -612,7 +612,7 @@
                     periodDays: 88,
                     distanceMillionKm: 57.9,
                     description: "Swift inner planet with the shortest orbit around the Sun.",
-                    videoUrl: "",
+                    videoUrl: "https://youtu.be/wbjIFAU-v5Q",
                     tone: "Inner world"
                 },
                 {
@@ -628,16 +628,24 @@
                     periodDays: 365.25,
                     distanceMillionKm: 149.6,
                     description: "Our reference world. All ages are compared against Earth years.",
-                    videoUrl: "",
-                    tone: "Reference"
+                    videoUrl: "https://youtu.be/TBa0J1HLEX4",
+                    tone: "Featured video"
+                },
+                {
+                    name: "Moon",
+                    periodDays: 27.3,
+                    distanceMillionKm: 0.384,
+                    description: "Earth's natural satellite. Tidally locked with a slow rotation and 1.54° axial tilt.",
+                    videoUrl: "https://youtu.be/HaB4Wd1YbUU",
+                    tone: "Featured video"
                 },
                 {
                     name: "Mars",
                     periodDays: 687,
                     distanceMillionKm: 227.9,
                     description: "The red planet, smaller and colder with a longer trip around the Sun.",
-                    videoUrl: "",
-                    tone: "Red planet"
+                    videoUrl: "https://youtu.be/woN9-rvQQDc",
+                    tone: "Featured video"
                 },
                 {
                     name: "Jupiter",
@@ -711,7 +719,7 @@
                     const planetYears = earthYears * 365.25 / planet.periodDays;
                     const revolutions = planetYears;
                     const videoEmbed = planet.videoUrl ? toEmbedUrl(planet.videoUrl) : "";
-                    const badge = planet.videoUrl ? planet.tone : "To follow";
+                    const badge = planet.tone;
 
                     return `
                         <article class="planet-card" style="animation-delay:${0.05 + (index * 0.04)}s">
@@ -742,7 +750,7 @@
                                 <div class="planet-video">
                                     ${videoEmbed
                                         ? `<iframe class="planet-video__frame" src="${videoEmbed}" title="${planet.name} tutorial video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
-                                        : `<div class="planet-video__placeholder"><div><strong>Video to follow</strong><p>Continuous video link will be added here later for ${planet.name}.</p></div></div>`}
+                                        : `<div class="planet-video__placeholder"><div><strong>No video URL yet</strong><p>Add a YouTube link for ${planet.name} to show it here.</p></div></div>`}
                                 </div>
                             </div>
                         </article>
