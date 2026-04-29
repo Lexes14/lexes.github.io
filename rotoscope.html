@@ -115,6 +115,36 @@
             max-width: 780px;
         }
 
+        .tools-banner {
+            background: linear-gradient(90deg, rgba(47,140,255,0.05), rgba(255,107,61,0.04));
+            border: 1px solid rgba(47,140,255,0.12);
+            padding: 0.7rem 0.9rem;
+            border-radius: 12px;
+            margin-bottom: 0.85rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .tools-list {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .tool-pill {
+            background: white;
+            border: 1px solid rgba(47,140,255,0.12);
+            padding: 0.35rem 0.6rem;
+            border-radius: 999px;
+            font-weight: 700;
+            color: var(--ink);
+            font-size: 0.86rem;
+        }
+
         .content-grid {
             display: grid;
             grid-template-columns: 1.08fr 0.92fr;
@@ -341,13 +371,24 @@
      </header>
 
      <main>
-         <section class="hero">
-             <h1>1-Minute Video Rotoscope</h1>
-             <p>
-                 Weekly progress from Week 1 to Week 12 with an interactive YouTube panel,
-                 plus 8 visual tutorial panels.
-             </p>
-         </section>
+        <section class="hero">
+            <div class="tools-banner" aria-hidden="false">
+                <div>
+                    A frame-by-frame rotoscope animated using the tracing technique and an auto-brush workflow
+                    in Adobe After Effects to create smooth, hand-traced motion.
+                </div>
+                <div class="tools-list" aria-label="Tools used">
+                    <span class="tool-pill">Adobe After Effects</span>
+                    <span class="tool-pill">CapCut</span>
+                </div>
+            </div>
+
+            <h1>1-Minute Video Rotoscope</h1>
+            <p>
+                Weekly progress from Week 1 to Week 12 with an interactive YouTube panel,
+                plus 8 visual tutorial panels.
+            </p>
+        </section>
 
          <section class="content-grid">
              <article class="panel">

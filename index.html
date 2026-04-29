@@ -136,6 +136,36 @@
             max-width: 720px;
         }
 
+        .tools-banner {
+            background: linear-gradient(90deg, rgba(140,232,255,0.06), rgba(255,168,77,0.04));
+            border: 1px solid rgba(100,228,255,0.12);
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 0.85rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .tools-list {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .tool-pill {
+            background: rgba(6, 10, 24, 0.85);
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.6rem;
+            border-radius: 999px;
+            font-weight: 700;
+            color: var(--text);
+            font-size: 0.86rem;
+        }
+
         .solar-section {
             background: var(--card);
             border: 1px solid rgba(255, 255, 255, 0.14);
@@ -543,6 +573,17 @@
 
     <main>
         <section class="intro">
+            <div class="tools-banner" aria-hidden="false">
+                <div>
+                    A dynamic 3D solar system animation built in Blender, using Python scripting (v3.3)
+                    in the Scripting workspace to automate procedural setup and drive accurate celestial motion.
+                </div>
+                <div class="tools-list" aria-label="Tools used">
+                    <span class="tool-pill">Blender</span>
+                    <span class="tool-pill">Python script</span>
+                </div>
+            </div>
+
             <h1>3D Solar System</h1>
             <p>
                 Interactive CSS-based model of the Sun and the eight planets with layered depth,
