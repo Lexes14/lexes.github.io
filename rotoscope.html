@@ -110,18 +110,37 @@
             margin-bottom: 0.6rem;
         }
 
-        .hero-link {
-            display: inline-block;
-            margin-bottom: 0.7rem;
-            color: var(--accent-2);
-            font-weight: 800;
-            text-decoration: none;
-            border-bottom: 2px solid rgba(47, 140, 255, 0.25);
+        .hero-video {
+            margin-bottom: 0.85rem;
+            border: 1px solid rgba(47, 140, 255, 0.22);
+            border-radius: 14px;
+            overflow: hidden;
+            background: #fff;
         }
 
-        .hero-link:hover {
+        .hero-video-frame {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: 0;
+            display: block;
+        }
+
+        .hero-video-meta {
+            padding: 0.55rem 0.75rem;
+            border-top: 1px solid rgba(47, 140, 255, 0.2);
+            background: linear-gradient(95deg, rgba(47, 140, 255, 0.08), rgba(255, 107, 61, 0.08));
+        }
+
+        .hero-video-meta a {
+            color: var(--accent-2);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .hero-video-meta a:hover {
             color: #1f73d9;
-            border-bottom-color: rgba(31, 115, 217, 0.45);
+            text-decoration: underline;
         }
 
         .hero p {
@@ -404,7 +423,19 @@
             </div>
 
             <h1>1-Minute Video Rotoscope</h1>
-            <a class="hero-link" href="https://youtu.be/1sC5ioKojus" target="_blank" rel="noopener">Watch on YouTube: https://youtu.be/1sC5ioKojus</a>
+            <div class="hero-video">
+                <iframe
+                    class="hero-video-frame"
+                    src="https://www.youtube.com/embed/1sC5ioKojus"
+                    title="1-Minute Video Rotoscope"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+                <div class="hero-video-meta">
+                    <a href="https://youtu.be/1sC5ioKojus" target="_blank" rel="noopener">Open this video on YouTube</a>
+                </div>
+            </div>
             <p>
                 Weekly progress from Week 1 to Week 12 with an interactive YouTube panel,
                 plus 8 visual tutorial panels.
