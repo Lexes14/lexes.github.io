@@ -286,6 +286,12 @@
             display: block;
         }
 
+        .tutorial-card img.is-missing {
+            object-fit: contain;
+            background: linear-gradient(135deg, rgba(255, 107, 61, 0.12), rgba(47, 140, 255, 0.12));
+            padding: 0.8rem;
+        }
+
         .tutorial-card .info {
             padding: 0.58rem;
         }
@@ -456,7 +462,7 @@
                          </div>
                      </article>
                      <article class="tutorial-card" style="animation-delay:0.1s">
-                         <img src="C:\Users\lexes\Pictures\Screenshots\Screenshot 2026-05-28 145937.png" alt="Panel 2 camera setup">
+                         <img src="images/Screenshot 2026-05-28 145937.png" alt="Panel 2 camera setup">
                          <div class="info">
                              <h3>Cut the Video into 5-Seconds Clips </h3>
                              <p>Divide the video into equal 5-second segments to create short, consistent clips for easier editing, analysis, or content creation.</p>
@@ -470,28 +476,28 @@
                          </div>
                      </article>
                      <article class="tutorial-card" style="animation-delay:0.2s">
-                         <img src="C:\Users\lexes\Pictures\Screenshots\Screenshot 2026-05-28 150711.png" alt="Panel 4 rough line pass">
+                         <img src="images/Screenshot 2026-05-28 150711.png" alt="Panel 4 rough line pass">
                          <div class="info">
                              <h3>Trace Each Layer</h3>
                              <p>Isolate each element and trace its outline with a vector tool. Freeze each layer to edit others independently</p>
                          </div>
                      </article>
                      <article class="tutorial-card" style="animation-delay:0.25s">
-                         <img src="C:\Users\lexes\Pictures\Screenshots\Screenshot 2026-05-28 150534.png" alt="Panel 5 cleanup process">
+                         <img src="images/Screenshot 2026-05-28 150534.png" alt="Panel 5 cleanup process">
                          <div class="info">
                              <h3>Add fill Colors to Layers</h3>
                              <p>Apply solid colors to the traced outlines to create a more finished look.</p>
                          </div>
                      </article>
                      <article class="tutorial-card" style="animation-delay:0.3s">
-                         <img src="C:\Users\lexes\Pictures\Screenshots\Screenshot 2026-05-28 150923.png" alt="Panel 6 color and shadows">
+                         <img src="images/Screenshot 2026-05-28 150923.png" alt="Panel 6 color and shadows">
                          <div class="info">
                              <h3>Render All Compositions</h3>
                              <p>Exports each 5-second clip as a separate video file.</p>
                          </div>
                      </article>
                      <article class="tutorial-card" style="animation-delay:0.35s">
-                         <img src="C:\Users\lexes\Pictures\Screenshots\Screenshot 2026-05-28 151010.png" alt="Panel 7 compositing layers">
+                         <img src="images/Screenshot 2026-05-28 151010.png" alt="Panel 7 compositing layers">
                          <div class="info">
                              <h3>Compile All 5-Second Clips</h3>
                              <p>Combine all clips in CapCut, add audio, and export in mp4 format.</p>
@@ -523,6 +529,7 @@
             const tutorialLink = document.getElementById("tutorialLink");
             const tutorialFrame = document.getElementById("tutorialFrame");
             const tutorialTriggers = document.querySelectorAll("[data-tutorial-video]");
+            const tutorialImages = document.querySelectorAll(".tutorial-card img");
 
             const toEmbedUrl = (url) => {
                 try {
@@ -544,6 +551,39 @@
 
                 return "";
             };
+
+            const createMissingImage = (label) => {
+                const svg = `
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="${label}">
+                        <defs>
+                            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                                <stop offset="0%" stop-color="#ffeddc" />
+                                <stop offset="100%" stop-color="#dbeaff" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="640" height="360" rx="28" fill="url(#g)" />
+                        <rect x="70" y="60" width="500" height="240" rx="18" fill="rgba(255,255,255,0.72)" stroke="rgba(21,24,33,0.16)" />
+                        <circle cx="188" cy="156" r="38" fill="#ff6b3d" opacity="0.18" />
+                        <path d="M120 240 245 150 312 206 390 138 520 240" fill="none" stroke="#2f8cff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+                        <text x="320" y="122" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#151821">Image not found</text>
+                        <text x="320" y="168" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#4f5a6b">${label}</text>
+                        <text x="320" y="206" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#4f5a6b">Place the file in the images folder next to this HTML page.</text>
+                    </svg>`;
+
+                return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg.trim())}`;
+            };
+
+            tutorialImages.forEach((image) => {
+                image.addEventListener("error", () => {
+                    if (image.dataset.fallbackApplied === "true") {
+                        return;
+                    }
+
+                    image.dataset.fallbackApplied = "true";
+                    image.classList.add("is-missing");
+                    image.src = createMissingImage(image.alt || "Missing image");
+                });
+            });
 
             chips.forEach((chip) => {
                 chip.addEventListener("click", () => {
