@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Solar System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Space+Grotesk:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -19,8 +22,8 @@
             color: #eef4ff;
             font-family: "Space Grotesk", sans-serif;
             background: radial-gradient(circle at 20% 15%, #172d62 0%, transparent 35%),
-                        radial-gradient(circle at 80% 0%, #4b1f12 0%, transparent 30%),
-                        linear-gradient(140deg, #06070d, #0b1228 35%, #111a3c);
+                radial-gradient(circle at 80% 0%, #4b1f12 0%, transparent 30%),
+                linear-gradient(140deg, #06070d, #0b1228 35%, #111a3c);
             overflow-x: hidden;
         }
 
@@ -40,9 +43,17 @@
         }
 
         @keyframes drift {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0); }
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         header {
@@ -125,8 +136,8 @@
         }
 
         .tools-banner {
-            background: linear-gradient(90deg, rgba(140,232,255,0.06), rgba(255,168,77,0.04));
-            border: 1px solid rgba(100,228,255,0.12);
+            background: linear-gradient(90deg, rgba(140, 232, 255, 0.06), rgba(255, 168, 77, 0.04));
+            border: 1px solid rgba(100, 228, 255, 0.12);
             padding: 0.85rem 1rem;
             border-radius: 12px;
             margin-bottom: 0.85rem;
@@ -154,7 +165,8 @@
             font-size: 0.86rem;
         }
 
-        .solar-section {
+        /* Video section */
+        .video-section {
             background: rgba(7, 12, 30, 0.72);
             border: 1px solid rgba(255, 255, 255, 0.14);
             border-radius: 24px;
@@ -163,110 +175,23 @@
             animation: reveal 1s 0.1s ease both;
         }
 
-        .space {
+        .video-wrapper {
             position: relative;
-            height: min(72vh, 720px);
-            min-height: 480px;
-            border-radius: 20px;
-            transform-style: preserve-3d;
-            perspective: 1100px;
-            background:
-                radial-gradient(circle at center, rgba(255, 185, 89, 0.07), transparent 38%),
-                linear-gradient(180deg, rgba(6, 10, 24, 0.85), rgba(5, 8, 18, 0.95));
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(100, 228, 255, 0.18);
+            background: #020817;
         }
 
-        .sun {
-            width: 86px;
-            height: 86px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, #ffe9b3, #ffc86f 35%, #ff9d32 70%);
-            box-shadow: 0 0 35px rgba(255, 182, 71, 0.85), 0 0 90px rgba(255, 137, 44, 0.45);
+        .video-wrapper iframe {
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 4;
-        }
-
-        .orbit {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform-style: preserve-3d;
-            border-radius: 50%;
-            border: 1px solid rgba(157, 199, 255, 0.24);
-            transform: translate(-50%, -50%) rotateX(68deg);
-            animation: spin linear infinite;
-        }
-
-        .planet {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            right: -7px;
-            top: 50%;
-            transform: translateY(-50%) rotateX(-68deg);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-
-        .mercury { width: 120px; height: 120px; animation-duration: 6s; }
-        .venus { width: 170px; height: 170px; animation-duration: 9s; }
-        .earth { width: 230px; height: 230px; animation-duration: 12s; }
-        .mars { width: 290px; height: 290px; animation-duration: 16s; }
-        .jupiter { width: 360px; height: 360px; animation-duration: 21s; }
-        .saturn { width: 430px; height: 430px; animation-duration: 27s; }
-        .uranus { width: 500px; height: 500px; animation-duration: 33s; }
-        .neptune { width: 570px; height: 570px; animation-duration: 40s; }
-
-        .mercury .planet { background: #d8cfbe; }
-        .venus .planet { background: #d8b487; width: 19px; height: 19px; right: -9px; }
-        .earth .planet { background: #57c6ff; width: 20px; height: 20px; right: -10px; }
-        .mars .planet { background: #dd704e; width: 17px; height: 17px; right: -8px; }
-        .jupiter .planet { background: #d9ab79; width: 35px; height: 35px; right: -17px; }
-        .saturn .planet {
-            background: #d7c691;
-            width: 30px;
-            height: 30px;
-            right: -15px;
-        }
-
-        .saturn .planet::after {
-            content: "";
-            position: absolute;
-            inset: 50% auto auto 50%;
-            width: 54px;
-            height: 18px;
-            border: 2px solid rgba(224, 210, 169, 0.95);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) rotate(16deg);
-        }
-
-        .uranus .planet { background: #87eeea; width: 25px; height: 25px; right: -12px; }
-        .neptune .planet { background: #4a83ff; width: 24px; height: 24px; right: -12px; }
-
-        .legend {
-            margin-top: 1rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 0.55rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.55rem;
-            background: rgba(9, 16, 40, 0.6);
-            border: 1px solid rgba(100, 228, 255, 0.35);
-            border-radius: 10px;
-            padding: 0.5rem 0.7rem;
-            font-size: 0.85rem;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
         }
 
         .cta {
@@ -498,16 +423,12 @@
             font-weight: 700;
         }
 
-        @keyframes spin {
-            from { transform: translate(-50%, -50%) rotateX(68deg) rotateZ(0deg); }
-            to { transform: translate(-50%, -50%) rotateX(68deg) rotateZ(360deg); }
-        }
-
         @keyframes reveal {
             from {
                 opacity: 0;
                 transform: translateY(24px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -515,10 +436,6 @@
         }
 
         @media (max-width: 768px) {
-            .space {
-                min-height: 430px;
-            }
-
             .calc-results {
                 grid-template-columns: 1fr;
             }
@@ -526,15 +443,6 @@
             .planet-stats {
                 grid-template-columns: 1fr;
             }
-
-            .neptune { width: 440px; height: 440px; }
-            .uranus { width: 390px; height: 390px; }
-            .saturn { width: 340px; height: 340px; }
-            .jupiter { width: 290px; height: 290px; }
-            .mars { width: 240px; height: 240px; }
-            .earth { width: 195px; height: 195px; }
-            .venus { width: 150px; height: 150px; }
-            .mercury { width: 110px; height: 110px; }
         }
 
         .site-footer {
@@ -548,6 +456,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="header-wrap">
@@ -574,36 +483,24 @@
 
             <h1>3D Solar System</h1>
             <p>
-                Interactive CSS-based model of the Sun and the eight planets with layered depth,
-                orbit motion, and a space-inspired UI. Use the second page for the full 12-week
-                rotoscope production log and panel-by-panel tutorial.
+                This 3D Solar System animation presents a realistic visualization of the Sun and the eight planets
+                orbiting around it. The model demonstrates the relative positions, movements, and rotations of celestial
+                bodies in space, providing an engaging and educational representation of our planetary system. Through
+                detailed textures, lighting, and animation, viewers can explore the beauty and structure of the Solar
+                System in a dynamic three-dimensional environment.
             </p>
             <a class="cta" href="rotoscope.html">Open Rotoscope Project Page</a>
         </section>
 
-        <section class="solar-section" aria-label="3D Solar System Model">
-            <div class="space">
-                <div class="sun" aria-hidden="true"></div>
-
-                <div class="orbit mercury"><div class="planet" aria-hidden="true"></div></div>
-                <div class="orbit venus"><div class="planet" aria-hidden="true"></div></div>
-                <div class="orbit earth"><div class="planet" aria-hidden="true"></div></div>
-                <div class="orbit mars"><div class="planet" aria-hidden="true"></div></div>
-                <div class="orbit jupiter"><div class="planet" aria-hidden="true"></div></div>
-                <div class="orbit saturn"><div class="planet" aria-hidden="true"></div></div>
-                <div class="orbit uranus"><div class="planet" aria-hidden="true"></div></div>
-                <div class="orbit neptune"><div class="planet" aria-hidden="true"></div></div>
-            </div>
-
-            <div class="legend">
-                <div class="legend-item"><span class="dot" style="background:#d8cfbe"></span>Mercury</div>
-                <div class="legend-item"><span class="dot" style="background:#d8b487"></span>Venus</div>
-                <div class="legend-item"><span class="dot" style="background:#57c6ff"></span>Earth</div>
-                <div class="legend-item"><span class="dot" style="background:#dd704e"></span>Mars</div>
-                <div class="legend-item"><span class="dot" style="background:#d9ab79"></span>Jupiter</div>
-                <div class="legend-item"><span class="dot" style="background:#d7c691"></span>Saturn</div>
-                <div class="legend-item"><span class="dot" style="background:#87eeea"></span>Uranus</div>
-                <div class="legend-item"><span class="dot" style="background:#4a83ff"></span>Neptune</div>
+        <!-- YouTube video section replacing the CSS solar system -->
+        <section class="video-section" aria-label="Solar System Video">
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/8gYHwN7Ru8w?autoplay=1&mute=1&loop=1&playlist=8gYHwN7Ru8w&controls=1&rel=0"
+                    title="3D Solar System Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
             </div>
         </section>
 
@@ -614,206 +511,210 @@
                     <p class="eyebrow">Calculate Time & Motion</p>
                     <h2 id="calculatorTitle">Calculate Time & Motion in the Solar System</h2>
                     <p>
-                        Enter Earth years to see each planet’s equivalent age, revolutions completed,
-                        orbital period, and distance from the Sun. Planet cards show the YouTube video linked for each world.
+                        Enter Earth years to see each planet's equivalent age, revolutions completed,
+                        orbital period, and distance from the Sun. Planet cards show the YouTube video linked for each
+                        world.
                     </p>
                 </div>
 
                 <form class="calculator-form" id="solarCalcForm">
                     <label for="earthYearsInput">Enter Earth years</label>
                     <div class="calculator-form-row">
-                        <input class="calculator-input" id="earthYearsInput" name="earthYears" type="number" min="0" step="0.01" value="22.76" placeholder="22.76">
+                        <input class="calculator-input" id="earthYearsInput" name="earthYears" type="number" min="0"
+                            step="0.01" value="22.76" placeholder="22.76">
                         <button class="calc-button" type="submit">Calculate</button>
                     </div>
                 </form>
 
-                <div class="calc-note">Earth is the reference frame. Results update instantly when you press Calculate.</div>
+                <div class="calc-note">Earth is the reference frame. Results update instantly when you press Calculate.
+                </div>
             </div>
 
             <div class="calc-results" id="planetPanels" aria-live="polite"></div>
         </section>
     </main>
 
-        <script>
-            // Calculator logic: reads the input, computes planet values, and renders the cards.
-            function initSolarCalculator() {
-                var orbitalData = [
-                    {
-                        name: "Mercury",
-                        periodDays: 88,
-                        distanceMillionKm: 57.9,
-                        description: "Swift inner planet with the shortest orbit around the Sun.",
-                        videoUrl: "https://youtu.be/wbjIFAU-v5Q",
-                        tone: "Inner world"
-                    },
-                    {
-                        name: "Venus",
-                        periodDays: 225,
-                        distanceMillionKm: 108.2,
-                        description: "Cloud-shrouded planet with a slow, retrograde spin and a thick atmosphere.",
-                        videoUrl: "https://youtu.be/OV1T-0e9O3A",
-                        tone: "Featured video"
-                    },
-                    {
-                        name: "Earth",
-                        periodDays: 365.25,
-                        distanceMillionKm: 149.6,
-                        description: "Our reference world. All ages are compared against Earth years.",
-                        videoUrl: "https://youtu.be/TBa0J1HLEX4",
-                        tone: "Featured video"
-                    },
-                    {
-                        name: "Moon",
-                        periodDays: 27.3,
-                        distanceMillionKm: 0.384,
-                        description: "Earth's natural satellite. Tidally locked with a slow rotation and 1.54° axial tilt.",
-                        videoUrl: "https://youtu.be/HaB4Wd1YbUU",
-                        tone: "Featured video"
-                    },
-                    {
-                        name: "Mars",
-                        periodDays: 687,
-                        distanceMillionKm: 227.9,
-                        description: "The red planet, smaller and colder with a longer trip around the Sun.",
-                        videoUrl: "https://youtu.be/woN9-rvQQDc",
-                        tone: "Featured video"
-                    },
-                    {
-                        name: "Jupiter",
-                        periodDays: 4333,
-                        distanceMillionKm: 778.5,
-                        description: "The gas giant with a huge orbit and a dominating presence in the outer system.",
-                        videoUrl: "https://youtu.be/0XKgXn_quuw?si=X1XCD6ZMw5AqZ5jY",
-                        tone: "Gas giant"
-                    },
-                    {
-                        name: "Saturn",
-                        periodDays: 10759,
-                        distanceMillionKm: 1434,
-                        description: "A ringed giant whose elegant system makes it one of the most recognizable planets.",
-                        videoUrl: "https://youtu.be/SRNNIgXt5RI",
-                        tone: "Ringed giant"
-                    },
-                    {
-                        name: "Uranus",
-                        periodDays: 30685,
-                        distanceMillionKm: 2871,
-                        description: "An icy giant that spins on its side and travels far beyond the inner planets.",
-                        videoUrl: "https://youtu.be/iL0a2bItHtY",
-                        tone: "Icy giant"
-                    },
-                    {
-                        name: "Neptune",
-                        periodDays: 60190,
-                        distanceMillionKm: 4495,
-                        description: "The blue outer world with a very long orbital path and powerful winds.",
-                        videoUrl: "https://youtu.be/3Tw-IWdkts8",
-                        tone: "Outer planet"
-                    }
-                ];
+    <script>
+        // Calculator logic: reads the input, computes planet values, and renders the cards.
+        function initSolarCalculator() {
+            var orbitalData = [
+                {
+                    name: "Mercury",
+                    periodDays: 88,
+                    distanceMillionKm: 57.9,
+                    description: "Swift inner planet with the shortest orbit around the Sun.",
+                    videoUrl: "https://youtu.be/wbjIFAU-v5Q",
+                    tone: "Inner world"
+                },
+                {
+                    name: "Venus",
+                    periodDays: 225,
+                    distanceMillionKm: 108.2,
+                    description: "Cloud-shrouded planet with a slow, retrograde spin and a thick atmosphere.",
+                    videoUrl: "https://youtu.be/OV1T-0e9O3A",
+                    tone: "Featured video"
+                },
+                {
+                    name: "Earth",
+                    periodDays: 365.25,
+                    distanceMillionKm: 149.6,
+                    description: "Our reference world. All ages are compared against Earth years.",
+                    videoUrl: "https://youtu.be/TBa0J1HLEX4",
+                    tone: "Featured video"
+                },
+                {
+                    name: "Moon",
+                    periodDays: 27.3,
+                    distanceMillionKm: 0.384,
+                    description: "Earth's natural satellite. Tidally locked with a slow rotation and 1.54° axial tilt.",
+                    videoUrl: "https://youtu.be/HaB4Wd1YbUU",
+                    tone: "Featured video"
+                },
+                {
+                    name: "Mars",
+                    periodDays: 687,
+                    distanceMillionKm: 227.9,
+                    description: "The red planet, smaller and colder with a longer trip around the Sun.",
+                    videoUrl: "https://youtu.be/woN9-rvQQDc",
+                    tone: "Featured video"
+                },
+                {
+                    name: "Jupiter",
+                    periodDays: 4333,
+                    distanceMillionKm: 778.5,
+                    description: "The gas giant with a huge orbit and a dominating presence in the outer system.",
+                    videoUrl: "https://youtu.be/0XKgXn_quuw?si=X1XCD6ZMw5AqZ5jY",
+                    tone: "Gas giant"
+                },
+                {
+                    name: "Saturn",
+                    periodDays: 10759,
+                    distanceMillionKm: 1434,
+                    description: "A ringed giant whose elegant system makes it one of the most recognizable planets.",
+                    videoUrl: "https://youtu.be/SRNNIgXt5RI",
+                    tone: "Ringed giant"
+                },
+                {
+                    name: "Uranus",
+                    periodDays: 30685,
+                    distanceMillionKm: 2871,
+                    description: "An icy giant that spins on its side and travels far beyond the inner planets.",
+                    videoUrl: "https://youtu.be/iL0a2bItHtY",
+                    tone: "Icy giant"
+                },
+                {
+                    name: "Neptune",
+                    periodDays: 60190,
+                    distanceMillionKm: 4495,
+                    description: "The blue outer world with a very long orbital path and powerful winds.",
+                    videoUrl: "https://youtu.be/3Tw-IWdkts8",
+                    tone: "Outer planet"
+                }
+            ];
 
-                var form = document.getElementById("solarCalcForm");
-                var input = document.getElementById("earthYearsInput");
-                var panelRoot = document.getElementById("planetPanels");
+            var form = document.getElementById("solarCalcForm");
+            var input = document.getElementById("earthYearsInput");
+            var panelRoot = document.getElementById("planetPanels");
 
-                function formatNumber(value, digits) {
-                    if (typeof digits === "undefined") {
-                        digits = 2;
-                    }
-
-                    return Number(value).toLocaleString(undefined, {
-                        minimumFractionDigits: digits,
-                        maximumFractionDigits: digits
-                    });
+            function formatNumber(value, digits) {
+                if (typeof digits === "undefined") {
+                    digits = 2;
                 }
 
-                function toEmbedUrl(url) {
-                    var parsed;
-                    var host;
-                    var videoId = "";
+                return Number(value).toLocaleString(undefined, {
+                    minimumFractionDigits: digits,
+                    maximumFractionDigits: digits
+                });
+            }
 
-                    try {
-                        parsed = new URL(url);
-                        host = parsed.hostname.replace("www.", "");
+            function toEmbedUrl(url) {
+                var parsed;
+                var host;
+                var videoId = "";
 
-                        if (host === "youtu.be") {
-                            videoId = parsed.pathname.slice(1);
-                        } else if (host === "youtube.com") {
-                            videoId = parsed.searchParams.get("v") || "";
-                        }
+                try {
+                    parsed = new URL(url);
+                    host = parsed.hostname.replace("www.", "");
 
-                        if (!videoId) {
-                            return "";
-                        }
+                    if (host === "youtu.be") {
+                        videoId = parsed.pathname.slice(1);
+                    } else if (host === "youtube.com") {
+                        videoId = parsed.searchParams.get("v") || "";
+                    }
 
-                        return "https://www.youtube.com/embed/" + videoId + "?autoplay=1&mute=1&loop=1&playlist=" + videoId + "&controls=1&rel=0";
-                    } catch (error) {
+                    if (!videoId) {
                         return "";
                     }
+
+                    return "https://www.youtube.com/embed/" + videoId + "?autoplay=1&mute=1&loop=1&playlist=" + videoId + "&controls=1&rel=0";
+                } catch (error) {
+                    return "";
                 }
+            }
 
-                function renderPanels() {
-                    var earthYears = Math.max(0, parseFloat(input.value) || 0);
+            function renderPanels() {
+                var earthYears = Math.max(0, parseFloat(input.value) || 0);
 
-                    panelRoot.innerHTML = orbitalData.map(function (planet, index) {
-                        var planetYears = earthYears * 365.25 / planet.periodDays;
-                        var revolutions = planetYears;
-                        var videoEmbed = planet.videoUrl ? toEmbedUrl(planet.videoUrl) : "";
-                        var badge = planet.tone;
-                        var animationDelay = 0.05 + (index * 0.04);
+                panelRoot.innerHTML = orbitalData.map(function (planet, index) {
+                    var planetYears = earthYears * 365.25 / planet.periodDays;
+                    var revolutions = planetYears;
+                    var videoEmbed = planet.videoUrl ? toEmbedUrl(planet.videoUrl) : "";
+                    var badge = planet.tone;
+                    var animationDelay = 0.05 + (index * 0.04);
 
-                        return '<article class="planet-card" style="animation-delay:' + animationDelay + 's">' +
-                            '<div class="planet-card__top">' +
-                                '<h3>' + planet.name + '</h3>' +
-                                '<span class="planet-badge">' + badge + '</span>' +
-                            '</div>' +
-                            '<div class="planet-card__body">' +
-                                '<div class="planet-stats">' +
-                                    '<div class="stat-pill">' +
-                                        '<span>Age on planet</span>' +
-                                        '<strong>' + formatNumber(planetYears) + ' years</strong>' +
-                                    '</div>' +
-                                    '<div class="stat-pill">' +
-                                        '<span>Revolutions</span>' +
-                                        '<strong>' + formatNumber(revolutions) + ' turns</strong>' +
-                                    '</div>' +
-                                    '<div class="stat-pill">' +
-                                        '<span>Orbital period</span>' +
-                                        '<strong>' + formatNumber(planet.periodDays, planet.periodDays < 10 ? 2 : 0) + ' Earth days</strong>' +
-                                    '</div>' +
-                                    '<div class="stat-pill">' +
-                                        '<span>Distance from Sun</span>' +
-                                        '<strong>' + formatNumber(planet.distanceMillionKm, 1) + ' million km</strong>' +
-                                    '</div>' +
-                                '</div>' +
-                                '<p class="planet-description">' + planet.description + '</p>' +
-                                '<div class="planet-video">' +
-                                    (videoEmbed
-                                        ? '<iframe class="planet-video__frame" src="' + videoEmbed + '" title="' + planet.name + ' tutorial video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
-                                        : '<div class="planet-video__placeholder"><div><strong>No video URL yet</strong><p>Add a YouTube link for ' + planet.name + ' to show it here.</p></div></div>') +
-                                '</div>' +
-                            '</div>' +
+                    return '<article class="planet-card" style="animation-delay:' + animationDelay + 's">' +
+                        '<div class="planet-card__top">' +
+                        '<h3>' + planet.name + '</h3>' +
+                        '<span class="planet-badge">' + badge + '</span>' +
+                        '</div>' +
+                        '<div class="planet-card__body">' +
+                        '<div class="planet-stats">' +
+                        '<div class="stat-pill">' +
+                        '<span>Age on planet</span>' +
+                        '<strong>' + formatNumber(planetYears) + ' years</strong>' +
+                        '</div>' +
+                        '<div class="stat-pill">' +
+                        '<span>Revolutions</span>' +
+                        '<strong>' + formatNumber(revolutions) + ' turns</strong>' +
+                        '</div>' +
+                        '<div class="stat-pill">' +
+                        '<span>Orbital period</span>' +
+                        '<strong>' + formatNumber(planet.periodDays, planet.periodDays < 10 ? 2 : 0) + ' Earth days</strong>' +
+                        '</div>' +
+                        '<div class="stat-pill">' +
+                        '<span>Distance from Sun</span>' +
+                        '<strong>' + formatNumber(planet.distanceMillionKm, 1) + ' million km</strong>' +
+                        '</div>' +
+                        '</div>' +
+                        '<p class="planet-description">' + planet.description + '</p>' +
+                        '<div class="planet-video">' +
+                        (videoEmbed
+                            ? '<iframe class="planet-video__frame" src="' + videoEmbed + '" title="' + planet.name + ' tutorial video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+                            : '<div class="planet-video__placeholder"><div><strong>No video URL yet</strong><p>Add a YouTube link for ' + planet.name + ' to show it here.</p></div></div>') +
+                        '</div>' +
+                        '</div>' +
                         '</article>';
-                    }).join("");
-                }
+                }).join("");
+            }
 
-                form.addEventListener("submit", function (event) {
-                    event.preventDefault();
-                    renderPanels();
-                });
-
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
                 renderPanels();
-            }
+            });
 
-            if (document.readyState === "loading") {
-                document.addEventListener("DOMContentLoaded", initSolarCalculator);
-            } else {
-                initSolarCalculator();
-            }
-        </script>
+            renderPanels();
+        }
 
-        <footer class="site-footer">
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initSolarCalculator);
+        } else {
+            initSolarCalculator();
+        }
+    </script>
+
+    <footer class="site-footer">
         <p>&copy; 2026 Lexes Bj Acuesta BSIT-NS-T-2A. All rights reserved.</p>
     </footer>
 </body>
+
 </html>
