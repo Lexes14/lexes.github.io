@@ -426,7 +426,7 @@
             <div class="hero-video">
                 <iframe
                     class="hero-video-frame"
-                    src="https://youtu.be/-ilcO5IGX78"
+                    src="https://www.youtube.com/embed/-ilcO5IGX78"
                     title="1-Minute Video Rotoscope"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerpolicy="strict-origin-when-cross-origin"
@@ -588,7 +588,8 @@
                     }
 
                     if (host === "youtube.com") {
-                        const id = parsed.searchParams.get("v");
+                        const pathParts = parsed.pathname.split("/").filter(Boolean);
+                        const id = parsed.searchParams.get("v") || (["embed", "shorts"].includes(pathParts[0]) ? pathParts[1] : "");
                         return id ? `https://www.youtube.com/embed/${id}` : "";
                     }
                 } catch (error) {
