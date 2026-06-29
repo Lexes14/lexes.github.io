@@ -43,17 +43,9 @@
         }
 
         @keyframes drift {
-            0% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-8px);
-            }
-
-            100% {
-                transform: translateY(0);
-            }
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
         }
 
         header {
@@ -425,12 +417,105 @@
             font-weight: 700;
         }
 
+        /* ===== DOWNLOAD SECTION ===== */
+        .download-section {
+            animation: reveal 0.9s 0.2s ease both;
+        }
+
+        .download-shell {
+            background: linear-gradient(145deg, rgba(8, 17, 39, 0.92), rgba(10, 18, 52, 0.82));
+            border: 1px solid rgba(255, 168, 77, 0.25);
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .download-info {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .download-info .eyebrow {
+            color: #ffa84d;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .download-info h2 {
+            font-family: "Orbitron", sans-serif;
+            font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+            line-height: 1.15;
+            letter-spacing: 0.04em;
+        }
+
+        .download-info p {
+            color: #b8c7e3;
+            font-size: 0.92rem;
+            max-width: 540px;
+            margin-top: 0.25rem;
+        }
+
+        .download-meta {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .download-tag {
+            background: rgba(255, 168, 77, 0.1);
+            border: 1px solid rgba(255, 168, 77, 0.3);
+            color: #ffd089;
+            padding: 0.3rem 0.7rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: none;
+            border-radius: 16px;
+            padding: 1rem 1.6rem;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: #02111f;
+            background: linear-gradient(90deg, #ffd089, #ffa84d);
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            box-shadow: 0 10px 28px rgba(255, 168, 77, 0.3);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(255, 168, 77, 0.42);
+        }
+
+        .download-btn svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
         @keyframes reveal {
             from {
                 opacity: 0;
                 transform: translateY(24px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -445,6 +530,16 @@
             .planet-stats {
                 grid-template-columns: 1fr;
             }
+
+            .download-shell {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         .site-footer {
@@ -456,7 +551,7 @@
             font-size: 0.88rem;
             text-align: center;
         }
-    </style>
+    </style>    
 </head>
 
 <body>
@@ -494,7 +589,7 @@
             <a class="cta" href="rotoscope.html">Open Rotoscope Project Page</a>
         </section>
 
-        <!-- Local video section. Put your main video at videos/solar-system.mp4 -->
+        <!-- Local video section -->
         <section class="video-section" aria-label="Solar System Video">
             <div class="video-wrapper">
                 <video autoplay muted loop playsinline preload="auto" aria-label="3D Solar System Video">
@@ -504,7 +599,7 @@
             </div>
         </section>
 
-        <!-- Calculator section: form markup is here; behavior is in the script below -->
+        <!-- Calculator section -->
         <section class="calculator-section" aria-labelledby="calculatorTitle">
             <div class="calculator-shell">
                 <div class="calculator-copy">
@@ -526,106 +621,594 @@
                     </div>
                 </form>
 
-                <div class="calc-note">Earth is the reference frame. Results update instantly when you press Calculate.
-                </div>
+                <div class="calc-note">Earth is the reference frame. Results update instantly when you press Calculate.</div>
             </div>
 
             <div class="calc-results" id="planetPanels" aria-live="polite"></div>
         </section>
+
+        <!-- Download Section -->
+        <section class="download-section" aria-labelledby="downloadTitle">
+            <div class="download-shell">
+                <div class="download-info">
+                    <p class="eyebrow">Blender Python Script</p>
+                    <h2 id="downloadTitle">Solar System Downloadable Script</h2>
+                    <p>
+                        The complete Blender Python script used to procedurally generate this 3D Solar System —
+                        including planet orbits, textures, cinematic camera moves, and universe FX.
+                        Open it in Blender's Scripting workspace and run it directly.
+                    </p>
+                    <div class="download-meta">
+                        <span class="download-tag">Python 3</span>
+                        <span class="download-tag">Blender 3.3+</span>
+                        <span class="download-tag">EEVEE Renderer</span>
+                        <span class="download-tag">.py file</span>
+                    </div>
+                </div>
+                <button class="download-btn" id="downloadScriptBtn" aria-label="Download Solar System Blender Python script">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Download Script
+                </button>
+            </div>
+        </section>
     </main>
 
     <script>
-        // Calculator logic: reads the input, computes planet values, and renders the cards.
+        // ===== SOLAR SYSTEM BLENDER SCRIPT (embedded for download) =====
+        var SOLAR_SCRIPT_CONTENT = `import os
+import random
+from pathlib import Path
+import bpy
+import math
+from mathutils import Euler, Vector
+
+# === SETTINGS ===
+OUTPUT_FPS = 30
+TARGET_DURATION_SECONDS = 60
+TOTAL_FRAMES = TARGET_DURATION_SECONDS * OUTPUT_FPS
+
+RENDER_WIDTH = 1920
+RENDER_HEIGHT = 1080
+RENDER_SCALE = 100
+
+# Universal Path Redirect
+acuesta_dir = Path.home() / "Documents" / "Acuesta"
+
+TEXTURE_PATHS = {
+    "Sun": str(acuesta_dir / "sun.jpg"),
+    "Mercury": str(acuesta_dir / "mercury.jpg"),
+    "Venus": str(acuesta_dir / "venus.jpg"),
+    "Earth": str(acuesta_dir / "earth.jpg"),
+    "Moon": str(acuesta_dir / "moon.jpg"),
+    "Mars": str(acuesta_dir / "mars.jpg"),
+    "Jupiter": str(acuesta_dir / "jupiter.jpg"),
+    "Saturn": str(acuesta_dir / "saturn.jpg"),
+    "SaturnRing": str(acuesta_dir / "saturn_ring.png"),
+    "Uranus": str(acuesta_dir / "uranus.jpg"),
+    "Neptune": str(acuesta_dir / "neptune.jpg"),
+    "Pluto": str(acuesta_dir / "pluto.jpg"),
+    "Stars": str(acuesta_dir / "stars.jpg")
+}
+
+# Windows default font, gracefully falls back to Blender default if not found
+PLANET_LABEL_FONT_PATH = r"C:\\Windows\\Fonts\\bahnschrift.ttf"
+
+# Science-based data
+planet_data = [
+    {"name": "Mercury", "distance": 4,  "radius": 0.3,  "period": 88,    "rotation_hours": 1407.6, "tilt": 0.03},
+    {"name": "Venus",   "distance": 6,  "radius": 0.5,  "period": 225,   "rotation_hours": -5832.5,"tilt": 2.64},  
+    {"name": "Earth",   "distance": 8,  "radius": 0.5,  "period": 365,   "rotation_hours": 23.9,   "tilt": 23.44},
+    {"name": "Moon",    "distance": 9,  "radius": 0.2,  "period": 365,   "rotation_hours": 655.2,  "tilt": 6.68},  
+    {"name": "Mars",    "distance": 10, "radius": 0.4,  "period": 687,   "rotation_hours": 24.6,   "tilt": 25.19},
+    {"name": "Jupiter", "distance": 14, "radius": 1.1,  "period": 4333,  "rotation_hours": 9.9,    "tilt": 3.13},
+    {"name": "Saturn",  "distance": 18, "radius": 0.9,  "period": 10759, "rotation_hours": 10.7,   "tilt": 26.73},
+    {"name": "Uranus",  "distance": 22, "radius": 0.7,  "period": 30685, "rotation_hours": -17.2,  "tilt": 97.77},  
+    {"name": "Neptune", "distance": 26, "radius": 0.7,  "period": 60190, "rotation_hours": 16.1,   "tilt": 28.32},
+    {"name": "Pluto",   "distance": 30, "radius": 0.15, "period": 90560, "rotation_hours": -153.3, "tilt": 122.53},  
+]
+
+SYSTEM_RADIUS = max(planet["distance"] + planet["radius"] for planet in planet_data)
+
+# Cinematic phase timings
+BLACK_SCREEN_END = 10
+STARS_REVEAL_END = 30
+SUN_REVEAL_FRAME = 40
+PLANET_REVEAL_START = 50
+PLANET_REVEAL_STEP = 12
+SYSTEM_ROTATION_START = PLANET_REVEAL_START + (len(planet_data) * PLANET_REVEAL_STEP) + 40
+WIDE_SHOT_START = TOTAL_FRAMES - 100
+
+ROTATION_START_FRAME = SYSTEM_ROTATION_START
+ORBITAL_SPEED_MULTIPLIER = 2.0  
+
+# Universe FX settings
+STAR_COUNT = 1200
+STARFIELD_INNER_RADIUS = SYSTEM_RADIUS * 2.1
+STARFIELD_OUTER_RADIUS = SYSTEM_RADIUS * 7.0
+METEOR_COUNT = 36
+SPACESHIP_COUNT = 12
+FX_RANDOM_SEED = 2026
+
+FX_VIEW_X_MIN = -34.0
+FX_VIEW_X_MAX = 34.0
+FX_VIEW_Z_MIN = 2.0
+FX_VIEW_Z_MAX = 28.0
+
+
+# === CLEANUP & ENGINE SETUP ===
+bpy.ops.object.select_all(action='SELECT')
+bpy.ops.object.delete(use_global=False)
+
+scene = bpy.context.scene
+scene.render.engine = 'BLENDER_EEVEE'
+scene.render.fps = OUTPUT_FPS
+scene.render.fps_base = 1.0
+scene.frame_start = 1
+scene.frame_end = TOTAL_FRAMES
+scene.render.resolution_x = RENDER_WIDTH
+scene.render.resolution_y = RENDER_HEIGHT
+scene.render.resolution_percentage = RENDER_SCALE
+
+try:
+    scene.eevee.use_soft_shadows = True
+    scene.eevee.shadow_cascade_size = '4096' 
+except Exception:
+    pass
+
+# Font Loader
+planet_label_font = None
+if os.path.exists(PLANET_LABEL_FONT_PATH):
+    try:
+        planet_label_font = bpy.data.fonts.load(PLANET_LABEL_FONT_PATH)
+    except Exception:
+        pass
+
+
+# === HELPER FUNCTIONS ===
+def create_texture_material(name, emission_strength=0):
+    path = TEXTURE_PATHS.get(name)
+    if not path or not os.path.exists(path):
+        return None
+        
+    mat = bpy.data.materials.new(name=f"{name}_Mat")
+    mat.use_nodes = True
+    nodes = mat.node_tree.nodes
+    links = mat.node_tree.links
+
+    for node in nodes: nodes.remove(node)
+
+    output = nodes.new(type='ShaderNodeOutputMaterial')
+    bsdf = nodes.new(type='ShaderNodeBsdfPrincipled')
+    tex_image = nodes.new(type='ShaderNodeTexImage')
+    
+    bsdf.inputs['Roughness'].default_value = 0.9
+    bsdf.inputs['Metallic'].default_value = 0.0
+
+    try:
+        tex_image.image = bpy.data.images.load(path)
+        links.new(tex_image.outputs['Color'], bsdf.inputs['Base Color'])
+    except:
+        pass
+
+    if emission_strength > 0:
+        emission = nodes.new(type='ShaderNodeEmission')
+        emission.inputs['Strength'].default_value = emission_strength
+        mix = nodes.new(type='ShaderNodeMixShader')
+
+        links.new(tex_image.outputs['Color'], emission.inputs['Color'])
+        links.new(bsdf.outputs['BSDF'], mix.inputs[1])
+        links.new(emission.outputs['Emission'], mix.inputs[2])
+        links.new(mix.outputs['Shader'], output.inputs['Surface'])
+    else:
+        links.new(bsdf.outputs['BSDF'], output.inputs['Surface'])
+
+    return mat
+
+def create_emission_material(name, color=(1.0, 1.0, 1.0, 1.0), strength=3.0):
+    mat = bpy.data.materials.new(name=name)
+    mat.use_nodes = True
+    nodes = mat.node_tree.nodes
+    links = mat.node_tree.links
+    for node in nodes: nodes.remove(node)
+
+    output = nodes.new(type='ShaderNodeOutputMaterial')
+    emission = nodes.new(type='ShaderNodeEmission')
+    emission.inputs['Color'].default_value = color
+    emission.inputs['Strength'].default_value = strength
+    links.new(emission.outputs['Emission'], output.inputs['Surface'])
+    
+    try:
+        mat.shadow_method = 'NONE'
+    except AttributeError:
+        pass
+        
+    return mat
+
+def set_object_visibility(obj, frame, visible):
+    obj.hide_viewport = not visible
+    obj.hide_render = not visible
+    obj.keyframe_insert(data_path="hide_viewport", frame=frame)
+    obj.keyframe_insert(data_path="hide_render", frame=frame)
+
+def _random_unit_vector():
+    while True:
+        v = Vector((random.uniform(-1.0, 1.0), random.uniform(-1.0, 1.0), random.uniform(-1.0, 1.0)))
+        if v.length > 0.0001: return v.normalized()
+
+def safe_move_to_collection(obj, target_collection):
+    for coll in list(obj.users_collection):
+        coll.objects.unlink(obj)
+    target_collection.objects.link(obj)
+
+
+# === UNIVERSE FX ===
+def create_universe_effects():
+    random.seed(FX_RANDOM_SEED)
+    fx_col = bpy.data.collections.new("UniverseFX")
+    bpy.context.scene.collection.children.link(fx_col)
+
+    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, radius=1.0)
+    star_template = bpy.context.object
+    star_template.data.materials.append(create_emission_material("Universe_StarMat", color=(1.0, 0.98, 0.92, 1.0), strength=9.0))
+    star_template.visible_shadow = False
+    
+    safe_move_to_collection(star_template, fx_col)
+
+    for i in range(STAR_COUNT):
+        loc = _random_unit_vector() * random.uniform(STARFIELD_INNER_RADIUS, STARFIELD_OUTER_RADIUS)
+        star = star_template.copy()
+        star.data = star_template.data
+        star.location = loc
+        size = random.uniform(0.05, 0.2) * (1.9 if i % 11 == 0 else 1.0)
+        star.scale = (size, size, size)
+        fx_col.objects.link(star)
+
+    ship_mat = create_emission_material("ShipMat", color=(0.3, 0.8, 1.0, 1.0), strength=5.0)
+    for i in range(SPACESHIP_COUNT):
+        bpy.ops.mesh.primitive_cylinder_add(radius=0.3, depth=1.5)
+        ship = bpy.context.object
+        ship.data.materials.append(ship_mat)
+        ship.visible_shadow = False
+        
+        safe_move_to_collection(ship, fx_col)
+        
+        start_frame = random.randint(STARS_REVEAL_END + 20, TOTAL_FRAMES - 160)
+        end_frame = min(TOTAL_FRAMES - 10, start_frame + random.randint(110, 220))
+        start_loc = Vector((random.uniform(FX_VIEW_X_MIN, FX_VIEW_X_MAX), random.uniform(-95, -42), random.uniform(2, 12)))
+        end_loc = Vector((start_loc.x + random.uniform(-16, 16), random.uniform(8, 72), start_loc.z + random.uniform(-7, 12)))
+        
+        bpy.context.preferences.edit.keyframe_new_interpolation_type = 'LINEAR'
+        ship.location = start_loc
+        ship.keyframe_insert(data_path="location", frame=start_frame)
+        ship.location = end_loc
+        ship.keyframe_insert(data_path="location", frame=end_frame)
+        
+        direction = (end_loc - start_loc).normalized()
+        ship.rotation_mode = 'XYZ'
+        ship.rotation_euler = direction.to_track_quat('Z', 'Y').to_euler()
+        
+        set_object_visibility(ship, 1, False)
+        set_object_visibility(ship, start_frame, True)
+        set_object_visibility(ship, end_frame, True)
+        set_object_visibility(ship, end_frame + 1, False)
+
+
+# === BACKGROUND ===
+world = bpy.data.worlds.get("World") or bpy.data.worlds.new("World")
+scene.world = world
+world.use_nodes = True
+wn = world.node_tree.nodes
+wl = world.node_tree.links
+for node in wn: wn.remove(node)
+
+w_out = wn.new('ShaderNodeOutputWorld')
+w_bg = wn.new('ShaderNodeBackground')
+w_tex = wn.new('ShaderNodeTexEnvironment')
+
+try:
+    w_tex.image = bpy.data.images.load(TEXTURE_PATHS["Stars"])
+    wl.new(w_tex.outputs['Color'], w_bg.inputs['Color'])
+except:
+    w_bg.inputs['Color'].default_value = (0.01, 0.01, 0.02, 1.0)
+
+wl.new(w_bg.outputs['Background'], w_out.inputs['Surface'])
+
+w_bg.inputs['Strength'].default_value = 0.0
+w_bg.inputs['Strength'].keyframe_insert("default_value", frame=1)
+w_bg.inputs['Strength'].keyframe_insert("default_value", frame=BLACK_SCREEN_END)
+w_bg.inputs['Strength'].default_value = 0.7
+w_bg.inputs['Strength'].keyframe_insert("default_value", frame=STARS_REVEAL_END)
+
+
+# === ORBIT LINES ===
+def create_orbit_line(distance, name):
+    bpy.ops.curve.primitive_bezier_circle_add(radius=distance, location=(0, 0, 0))
+    orbit = bpy.context.object
+    orbit.name = f"{name}_OrbitLine"
+    orbit.data.fill_mode = 'FULL'
+    orbit.data.bevel_depth = 0.015 if name == "Moon" else 0.02
+    orbit.data.resolution_u = 64
+    orbit.visible_shadow = False 
+
+    mat = bpy.data.materials.new(name=f"{name}_OrbitMat")
+    mat.use_nodes = True
+    n = mat.node_tree.nodes
+    for node in n: n.remove(node)
+    
+    em = n.new('ShaderNodeEmission')
+    out = n.new('ShaderNodeOutputMaterial')
+    
+    color = (0.7, 0.7, 0.9, 1) if name == "Moon" else (1.0, 0.6, 0.2, 1) if name == "Pluto" else (0.8, 0.8, 0.8, 1)
+    em.inputs['Color'].default_value = color
+    em.inputs['Strength'].default_value = 1.0
+    
+    try:
+        mat.shadow_method = 'NONE'
+    except AttributeError:
+        pass
+        
+    mat.node_tree.links.new(em.outputs['Emission'], out.inputs['Surface'])
+    orbit.data.materials.append(mat)
+    return orbit
+
+
+# === ADVANCED SATURN RINGS ===
+def create_saturn_rings(parent_orbit, distance, radius):
+    plane_size = radius * 5.0 
+    bpy.ops.mesh.primitive_plane_add(size=plane_size, location=(distance, 0, 0)) 
+    ring = bpy.context.object
+    ring.name = "SaturnRings"
+    ring.parent = parent_orbit
+    ring.visible_shadow = False 
+
+    ring.rotation_mode = 'XYZ'
+    ring.rotation_euler[0] = math.radians(26.73) 
+
+    ring_mat = bpy.data.materials.new(name="RingMaterial")
+    ring_mat.use_nodes = True
+    
+    try:
+        ring_mat.blend_method = 'HASHED'
+        ring_mat.shadow_method = 'HASHED'
+    except AttributeError:
+        pass
+
+    r_nodes = ring_mat.node_tree.nodes
+    r_links = ring_mat.node_tree.links
+    for node in list(r_nodes): r_nodes.remove(node)
+
+    r_out = r_nodes.new('ShaderNodeOutputMaterial')
+    r_bsdf = r_nodes.new('ShaderNodeBsdfPrincipled')
+    r_transparent = r_nodes.new('ShaderNodeBsdfTransparent')
+    r_mix_shader = r_nodes.new('ShaderNodeMixShader')
+    r_tex = r_nodes.new('ShaderNodeTexImage')
+
+    r_coord = r_nodes.new('ShaderNodeTexCoord')
+    r_length = r_nodes.new('ShaderNodeVectorMath')
+    r_length.operation = 'LENGTH'
+    r_links.new(r_coord.outputs['Object'], r_length.inputs[0])
+
+    r_map = r_nodes.new('ShaderNodeMapRange')
+    r_map.inputs[1].default_value = 1.15 * radius 
+    r_map.inputs[2].default_value = 2.45 * radius
+    r_links.new(r_length.outputs['Value'], r_map.inputs[0])
+
+    r_combine = r_nodes.new('ShaderNodeCombineXYZ')
+    r_links.new(r_map.outputs['Result'], r_combine.inputs[0]) 
+    r_links.new(r_map.outputs['Result'], r_combine.inputs[1]) 
+    r_links.new(r_combine.outputs['Vector'], r_tex.inputs['Vector'])
+
+    r_math_inner = r_nodes.new('ShaderNodeMath')
+    r_math_inner.operation = 'GREATER_THAN'
+    r_math_inner.inputs[1].default_value = 1.08 * radius 
+    r_links.new(r_length.outputs['Value'], r_math_inner.inputs[0])
+
+    r_math_outer = r_nodes.new('ShaderNodeMath')
+    r_math_outer.operation = 'LESS_THAN'
+    r_math_outer.inputs[1].default_value = 2.45 * radius
+    r_links.new(r_length.outputs['Value'], r_math_outer.inputs[0])
+
+    r_math_combine = r_nodes.new('ShaderNodeMath')
+    r_math_combine.operation = 'MULTIPLY'
+    r_links.new(r_math_inner.outputs['Value'], r_math_combine.inputs[0])
+    r_links.new(r_math_outer.outputs['Value'], r_math_combine.inputs[1])
+
+    r_math_alpha = r_nodes.new('ShaderNodeMath')
+    r_math_alpha.operation = 'MULTIPLY'
+    r_links.new(r_math_combine.outputs['Value'], r_math_alpha.inputs[0])
+
+    r_bsdf.inputs['Roughness'].default_value = 0.8
+    try:
+        r_tex.image = bpy.data.images.load(TEXTURE_PATHS["SaturnRing"])
+        r_links.new(r_tex.outputs['Color'], r_bsdf.inputs['Base Color'])
+        r_links.new(r_tex.outputs['Alpha'], r_math_alpha.inputs[1])
+    except:
+        r_math_alpha.inputs[1].default_value = 0.5
+        r_bsdf.inputs['Base Color'].default_value = (0.7, 0.6, 0.5, 0.5)
+
+    r_links.new(r_math_alpha.outputs['Value'], r_mix_shader.inputs['Fac'])
+    r_links.new(r_transparent.outputs['BSDF'], r_mix_shader.inputs[1]) 
+    r_links.new(r_bsdf.outputs['BSDF'], r_mix_shader.inputs[2])        
+
+    r_links.new(r_mix_shader.outputs['Shader'], r_out.inputs['Surface'])
+    ring.data.materials.append(ring_mat)
+    return ring
+
+
+# === GENERATE PLANETS & SUN ===
+bpy.context.preferences.edit.keyframe_new_interpolation_type = 'LINEAR'
+
+bpy.ops.mesh.primitive_uv_sphere_add(radius=2, location=(0, 0, 0), segments=64, ring_count=32)
+sun = bpy.context.object
+sun.name = "Sun"
+bpy.ops.object.shade_smooth()
+sun_mat = create_texture_material("Sun", emission_strength=5.0)
+if sun_mat: sun.data.materials.append(sun_mat)
+
+sun.rotation_mode = 'XYZ'
+sun.rotation_euler[2] = 0
+sun.keyframe_insert("rotation_euler", frame=ROTATION_START_FRAME)
+sun.rotation_euler[2] = math.radians(360.0 / (25 * 24) * (TOTAL_FRAMES - ROTATION_START_FRAME))
+sun.keyframe_insert("rotation_euler", frame=TOTAL_FRAMES)
+
+planet_objects = []
+
+for idx, p in enumerate(planet_data):
+    bpy.ops.object.empty_add(type='PLAIN_AXES', location=(0,0,0))
+    orbit_empty = bpy.context.object
+    orbit_empty.name = f"{p['name']}_Orbit"
+    
+    orbit_line = create_orbit_line(p['distance'], p['name'])
+    
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=p['radius'], location=(p['distance'], 0, 0), segments=64, ring_count=32)
+    planet_obj = bpy.context.object
+    planet_obj.name = p['name']
+    bpy.ops.object.shade_smooth()
+    
+    mat = create_texture_material(p['name'], emission_strength=1.2 if p['name']=="Pluto" else 0)
+    if mat: planet_obj.data.materials.append(mat)
+    
+    planet_obj.parent = orbit_empty
+    
+    rings = create_saturn_rings(orbit_empty, p['distance'], p['radius']) if p['name'] == "Saturn" else None
+    
+    planet_obj.rotation_mode = 'XYZ'
+    planet_obj.rotation_euler[0] = math.radians(p['tilt'])
+    planet_obj.rotation_euler[2] = 0
+    planet_obj.keyframe_insert("rotation_euler", frame=ROTATION_START_FRAME)
+    
+    spin_speed = (360.0 / p['rotation_hours']) if p['rotation_hours'] != 0 else 0
+    planet_obj.rotation_euler[2] = math.radians(spin_speed * (TOTAL_FRAMES - ROTATION_START_FRAME))
+    planet_obj.keyframe_insert("rotation_euler", frame=TOTAL_FRAMES)
+    
+    orbit_empty.rotation_mode = 'XYZ'
+    orbit_empty.rotation_euler[2] = 0
+    orbit_empty.keyframe_insert("rotation_euler", frame=ROTATION_START_FRAME)
+    orbit_speed = (360.0 / p['period']) * ORBITAL_SPEED_MULTIPLIER
+    orbit_empty.rotation_euler[2] = math.radians(orbit_speed * (TOTAL_FRAMES - ROTATION_START_FRAME))
+    orbit_empty.keyframe_insert("rotation_euler", frame=TOTAL_FRAMES)
+
+    bpy.ops.object.text_add(location=(p['distance'], 0, p['radius'] + 0.3))
+    label = bpy.context.object
+    label.name = f"{p['name']}_Label"
+    label.data.body = p['name']
+    if planet_label_font: label.data.font = planet_label_font
+    label.data.size = max(0.4, p['radius'] * 0.6)
+    label.data.extrude = 0.0
+    label.data.align_x = 'CENTER'
+    label.rotation_euler = (math.radians(90), 0, 0)
+    label.parent = orbit_empty
+    label.visible_shadow = False
+
+    label_mat = create_emission_material(f"{p['name']}_LabelMat", strength=3.0)
+    label.data.materials.append(label_mat)
+    
+    planet_objects.append({
+        "object": planet_obj, "orbit": orbit_empty, "orbit_line": orbit_line, "rings": rings, "label": label, "data": p
+    })
+
+create_universe_effects()
+
+
+# === CINEMATIC CAMERA ===
+bpy.context.preferences.edit.keyframe_new_interpolation_type = 'BEZIER'
+
+bpy.ops.object.camera_add(location=(0, -80, 30), rotation=(math.radians(65), 0, 0))
+camera = bpy.context.object
+scene.camera = camera
+camera.data.lens = 30
+camera.data.clip_end = 2000
+
+def frame_cam(cam, tgt, d_back, h_off, frame):
+    cam.location = Vector(tgt) + Vector((0, -d_back, h_off))
+    cam.rotation_euler = (Vector(tgt) - cam.location).to_track_quat('-Z', 'Y').to_euler()
+    cam.keyframe_insert("location", frame=frame)
+    cam.keyframe_insert("rotation_euler", frame=frame)
+
+def frame_cam_angle(cam, tgt, radius, azimuth, h_off, frame):
+    th = math.radians(azimuth)
+    cam.location = Vector(tgt) + Vector((math.sin(th)*radius, -math.cos(th)*radius, h_off))
+    cam.rotation_euler = (Vector(tgt) - cam.location).to_track_quat('-Z', 'Y').to_euler()
+    cam.keyframe_insert("location", frame=frame)
+    cam.keyframe_insert("rotation_euler", frame=frame)
+
+frame_cam(camera, (0,0,0), 5.5, 1.8, 1)
+frame_cam(camera, (0,0,0), 5.5, 1.8, max(PLANET_REVEAL_START - 4, 9))
+
+last_end = 9
+for idx, info in enumerate(planet_objects):
+    p = info["data"]
+    app_f = PLANET_REVEAL_START + (idx * PLANET_REVEAL_STEP) + 1
+    show_f = app_f + max(2, PLANET_REVEAL_STEP // 3)
+    end_f = show_f + max(4, PLANET_REVEAL_STEP - (show_f - app_f) - 1)
+    
+    az = (-34 if idx % 2 == 0 else 34) + (idx % 3) * 6
+    dist = max(3.0, p['radius'] * (16.0 if p['name']=="Pluto" else 11.5 if p['name']=="Saturn" else 9.0))
+    hgt = max(0.75, p['radius'] * 2.2)
+    
+    frame_cam_angle(camera, (p['distance'],0,0), dist*1.35, az*0.7, hgt+0.45, app_f)
+    frame_cam_angle(camera, (p['distance'],0,0), dist, az, hgt, show_f)
+    frame_cam_angle(camera, (p['distance'],0,0), dist, az, hgt, end_f)
+    last_end = end_f
+
+fv_d, fv_h = max(82.0, SYSTEM_RADIUS * 2.7), max(28.0, SYSTEM_RADIUS * 0.95)
+b_frame = min(last_end + 16, TOTAL_FRAMES - 190)
+camera.location, camera.rotation_euler = (fv_d*0.14, -fv_d*0.72, fv_h*0.72), (math.radians(66), 0, math.radians(6))
+camera.keyframe_insert("location", frame=b_frame); camera.keyframe_insert("rotation_euler", frame=b_frame)
+
+f_frame = min(b_frame + 24, TOTAL_FRAMES - 150)
+camera.location, camera.rotation_euler = (0, -fv_d*0.9, fv_h*0.9), (math.radians(64), 0, math.radians(1.2))
+camera.keyframe_insert("location", frame=f_frame); camera.keyframe_insert("rotation_euler", frame=f_frame)
+
+e_frame = min(f_frame + 180, TOTAL_FRAMES - 60)
+camera.keyframe_insert("location", frame=e_frame); camera.keyframe_insert("rotation_euler", frame=e_frame)
+
+camera.location, camera.rotation_euler = (0, -fv_d*1.03, fv_h*1.02), (math.radians(63), 0, 0)
+camera.keyframe_insert("location", frame=TOTAL_FRAMES); camera.keyframe_insert("rotation_euler", frame=TOTAL_FRAMES)
+
+
+# === REVEAL VISIBILITY KEYS ===
+bpy.context.preferences.edit.keyframe_new_interpolation_type = 'CONSTANT'
+
+set_object_visibility(sun, 1, False)
+set_object_visibility(sun, SUN_REVEAL_FRAME, True)
+
+for idx, info in enumerate(planet_objects):
+    f = PLANET_REVEAL_START + (idx * PLANET_REVEAL_STEP)
+    for key in ["object", "label", "orbit_line", "rings"]:
+        if info.get(key):
+            set_object_visibility(info[key], 1, False)
+            set_object_visibility(info[key], f, True)
+
+
+# === LIGHTS ===
+bpy.ops.object.light_add(type='SUN', location=(0, 0, 30))
+bpy.context.object.data.energy = 3.0
+bpy.ops.object.light_add(type='AREA', location=(0, 0, 50))
+bpy.context.object.data.energy = 2.0
+bpy.context.object.data.size = 100
+
+print("Whole Universe Scene Complete. Safely linked FX to Collections. Ready to render!")
+`;
+
+        // ===== CALCULATOR LOGIC =====
         function initSolarCalculator() {
             var orbitalData = [
-                {
-                    name: "Sun",
-                    periodDays: 25.38,
-                    distanceMillionKm: 0,
-                    description: "The star at the center of the Solar System, powering the motion and light of every world.",
-                    videoFile: "videos/sun.mp4",
-                    tone: "Central star"
-                },
-                {
-                    name: "Mercury",
-                    periodDays: 88,
-                    distanceMillionKm: 57.9,
-                    description: "Swift inner planet with the shortest orbit around the Sun.",
-                    videoFile: "videos/mercury.mp4",
-                    tone: "Inner world"
-                },
-                {
-                    name: "Venus",
-                    periodDays: 225,
-                    distanceMillionKm: 108.2,
-                    description: "Cloud-shrouded planet with a slow, retrograde spin and a thick atmosphere.",
-                    videoFile: "videos/venus.mp4",
-                    tone: "Featured video"
-                },
-                {
-                    name: "Earth",
-                    periodDays: 365.25,
-                    distanceMillionKm: 149.6,
-                    description: "Our reference world. All ages are compared against Earth years.",
-                    videoFile: "videos/earth.mp4",
-                    tone: "Featured video"
-                },
-                {
-                    name: "Moon",
-                    periodDays: 27.3,
-                    distanceMillionKm: 0.384,
-                    description: "Earth's natural satellite. Tidally locked with a slow rotation and 1.54° axial tilt.",
-                    videoFile: "videos/moon.mp4",
-                    tone: "Featured video"
-                },
-                {
-                    name: "Mars",
-                    periodDays: 687,
-                    distanceMillionKm: 227.9,
-                    description: "The red planet, smaller and colder with a longer trip around the Sun.",
-                    videoFile: "videos/mars.mp4",
-                    tone: "Featured video"
-                },
-                {
-                    name: "Jupiter",
-                    periodDays: 4333,
-                    distanceMillionKm: 778.5,
-                    description: "The gas giant with a huge orbit and a dominating presence in the outer system.",
-                    videoFile: "videos/jupiter.mp4",
-                    tone: "Gas giant"
-                },
-                {
-                    name: "Saturn",
-                    periodDays: 10759,
-                    distanceMillionKm: 1434,
-                    description: "A ringed giant whose elegant system makes it one of the most recognizable planets.",
-                    videoFile: "videos/saturn.mp4",
-                    tone: "Ringed giant"
-                },
-                {
-                    name: "Uranus",
-                    periodDays: 30685,
-                    distanceMillionKm: 2871,
-                    description: "An icy giant that spins on its side and travels far beyond the inner planets.",
-                    videoFile: "videos/uranus.mp4",
-                    tone: "Icy giant"
-                },
-                {
-                    name: "Neptune",
-                    periodDays: 60190,
-                    distanceMillionKm: 4495,
-                    description: "The blue outer world with a very long orbital path and powerful winds.",
-                    videoFile: "videos/neptune.mp4",
-                    tone: "Outer planet"
-                },
-                {
-                    name: "Pluto",
-                    periodDays: 90560,
-                    distanceMillionKm: 5906,
-                    description: "A distant dwarf planet with a tilted orbit far beyond Neptune.",
-                    videoFile: "videos/pluto.mp4",
-                    tone: "Dwarf planet"
-                }
+                { name: "Sun", periodDays: 25.38, distanceMillionKm: 0, description: "Ang Sun ang sentro ng ating Solar System at ang pinakamalaking bagay dito, na bumubuo ng humigit-kumulang 99.86% ng kabuuang masa ng buong solar system. Isa itong napakalaking bola ng mainit na plasma na pangunahing binubuo ng hydrogen at helium. Sa kanyang ubod, nagaganap ang nuclear fusion, kung saan ang hydrogen ay nagiging helium at naglalabas ng napakalaking enerhiya sa anyo ng liwanag at init na nagbibigay-buhay sa Daigdig. Ang liwanag mula sa Araw ay umaabot sa Earth sa loob ng humigit-kumulang 8 minuto at 20 segundo. Tinatayang 4.6 bilyong taon na ang edad nito at inaasahang mananatiling isang main-sequence star sa loob ng humigit-kumulang 5 bilyong taon pa bago ito maging red giant. Wala itong mga buwan dahil ito mismo ang bituin na iniikutan ng lahat ng planeta sa ating Solar System.", videoFile: "videos/sun.mp4", tone: "Central star" },
+                { name: "Mercury", periodDays: 88, distanceMillionKm: 57.9, description: "Mercury is the closest planet to the Sun and the smallest of the eight major planets in the Solar System. It completes one orbit around the Sun in just 88 Earth days, making it the fastest-orbiting planet, which is why ancient civilizations associated it with the swift Roman messenger god Mercury. Despite being nearest to the Sun, Mercury is not the hottest planet because it lacks a substantial atmosphere to trap heat. Temperatures can soar to 430°C (800°F) during the day and plunge to -180°C (-290°F) at night, making it one of the most extreme worlds in terms of temperature variation. Its heavily cratered surface resembles Earth's Moon, indicating billions of years of asteroid impacts. Scientists have also discovered water ice hidden within permanently shadowed craters near its poles. Mercury has 0 moons and no ring system.", videoFile: "videos/mercury.mp4", tone: "Swift Planet" },
+                { name: "Venus", periodDays: 225, distanceMillionKm: 108.2, description: "Venus is often called Earth's Twin because its size, mass, and composition are very similar to Earth's, although the two planets are drastically different in environment. Venus possesses a dense atmosphere made mostly of carbon dioxide with thick clouds of sulfuric acid, creating a powerful greenhouse effect that makes it the hottest planet in the Solar System, with average surface temperatures reaching about 465°C (869°F). It rotates very slowly and in the opposite direction of most planets, meaning the Sun appears to rise in the west and set in the east. A single day on Venus is actually longer than its year. Its volcanic plains, towering mountains, and evidence of ancient volcanic activity continue to intrigue scientists searching for clues about its geological history. Venus has 0 moons and no rings.", videoFile: "videos/venus.mp4", tone: "Earth's Twin" },
+                { name: "Earth", periodDays: 365.25, distanceMillionKm: 149.6, description: "Our reference world. All ages are compared against Earth years.Earth is the third planet from the Sun and the only known world that supports life. About 71% of its surface is covered by liquid water, giving it its distinctive blue appearance when viewed from space. Earth's atmosphere, composed mainly of nitrogen and oxygen, protects life by filtering harmful solar radiation and maintaining temperatures suitable for living organisms. It is the largest of the four rocky planets and has active plate tectonics, which continuously reshape its continents and ocean floors. Earth's strong magnetic field shields it from the solar wind, while its stable climate and abundant water have allowed millions of species to evolve over billions of years. Earth completes one orbit around the Sun every 365.25 days and rotates once every 24 hours. Earth has 1 moon, the Moon.", videoFile: "videos/earth.mp4", tone: "Blue Planet" },
+                { name: "Moon", periodDays: 27.3, distanceMillionKm: 0.384, description: "The Moon is Earth's only natural satellite and the fifth-largest moon in the Solar System. Measuring about 3,474 kilometers (2,159 miles) in diameter, it orbits Earth at an average distance of 384,400 kilometers (238,855 miles). The Moon is tidally locked, meaning the same side always faces Earth, while the far side remained unseen until spacecraft explored it. Although it has no atmosphere capable of supporting life, its surface is covered with craters, mountains, and ancient lava plains called maria. The Moon plays a vital role in stabilizing Earth's axial tilt, helping maintain a relatively stable climate, and its gravitational pull creates the ocean tides. It became the first celestial body visited by humans during the Apollo 11 mission in 1969. The Moon has no moons of its own because it is already a natural satellite orbiting Earth.", videoFile: "videos/moon.mp4", tone: "Earth's Natural Satellite" },
+                { name: "Mars", periodDays: 687, distanceMillionKm: 227.9, description: "Mars is famously known as the Red Planet because iron oxide, commonly known as rust, covers much of its surface. It has the largest volcano in the Solar System, Olympus Mons, and one of the deepest canyons, Valles Marineris, stretching over 4,000 kilometers. Mars has seasons similar to Earth's because its axis is tilted by about 25 degrees. Scientists believe that billions of years ago, liquid water flowed across its surface, and frozen water still exists beneath its polar ice caps and underground. Because of its relatively Earth-like day length and evidence of ancient water, Mars is considered one of the most promising places to search for signs of past microbial life and is the primary target for future human exploration. Mars has 2 moons: Phobos and Deimos.", videoFile: "videos/mars.mp4", tone: "Red Planet" },
+                { name: "Jupiter", periodDays: 4333, distanceMillionKm: 778.5, description: "Jupiter is the largest planet in the Solar System, with a mass greater than all the other planets combined. This enormous gas giant is composed primarily of hydrogen and helium and is famous for the Great Red Spot, a gigantic storm that has raged for at least 300 years and is larger than Earth itself. Jupiter's powerful magnetic field is the strongest of any planet, and it produces intense radiation belts. Its rapid rotation causes noticeable flattening at the poles and creates colorful cloud bands across its atmosphere. Jupiter also plays an important role in protecting the inner Solar System by gravitationally deflecting many comets and asteroids. Jupiter has 95 confirmed moons, including the four largest—Io, Europa, Ganymede, and Callisto, known as the Galilean moons. It also has a faint ring system.", videoFile: "videos/jupiter.mp4", tone: "Giant Planet" },
+                { name: "Saturn", periodDays: 10759, distanceMillionKm: 1434, description: "Saturn is the second-largest planet in the Solar System and is world-renowned for its spectacular ring system, which is composed mostly of billions of particles of ice mixed with rock and dust. Although Saturn is a gas giant like Jupiter, it is less dense than water, meaning it would theoretically float if an enormous ocean existed. Its atmosphere features powerful storms and high-speed winds that can exceed 1,800 kilometers per hour. Saturn's largest moon, Titan, possesses a thick atmosphere and lakes of liquid methane and ethane, making it one of the most fascinating bodies in the Solar System. Saturn's rings extend hundreds of thousands of kilometers but are surprisingly thin. Saturn has 274 confirmed moons, the highest number of any planet currently known.", videoFile: "videos/saturn.mp4", tone: "Ringed Planet" },
+                { name: "Uranus", periodDays: 30685, distanceMillionKm: 2871, description: "Uranus is unique because it rotates on its side, with an axial tilt of about 98 degrees, causing its poles to experience decades of continuous sunlight followed by decades of darkness. This icy giant is composed largely of water, ammonia, and methane ices beneath its atmosphere. Methane absorbs red light and reflects blue-green wavelengths, giving Uranus its distinctive pale blue color. It is the coldest planetary atmosphere in the Solar System, with temperatures dropping to around -224°C (-371°F). Uranus has a faint system of rings and a complex magnetic field that is tilted relative to its axis. Uranus has 28 confirmed moons, many of which are named after characters from the works of William Shakespeare and Alexander Pope.", videoFile: "videos/uranus.mp4", tone: "Sideways Planet" },
+                { name: "Neptune", periodDays: 60190, distanceMillionKm: 4495, description: "Neptune is the eighth and most distant major planet from the Sun. It is a deep blue ice giant with an atmosphere rich in hydrogen, helium, and methane. Neptune experiences the fastest winds in the Solar System, reaching speeds of over 2,100 kilometers per hour (1,300 mph). Despite receiving very little sunlight due to its great distance from the Sun, Neptune generates internal heat that powers its dynamic weather systems and enormous storms, including the famous Great Dark Spot observed by spacecraft. Neptune takes about 165 Earth years to complete one orbit around the Sun. Neptune has 16 confirmed moons, the largest being Triton, which orbits in the opposite direction of Neptune's rotation and is believed to be a captured object from the Kuiper Belt.", videoFile: "videos/neptune.mp4", tone: "Windy Planet" },
+                { name: "Pluto", periodDays: 90560, distanceMillionKm: 5906, description: "Pluto is a dwarf planet located in the Kuiper Belt, a vast region of icy bodies beyond Neptune. Discovered in 1930, Pluto was considered the ninth planet until 2006, when the International Astronomical Union reclassified it because it had not cleared its orbital neighborhood. Despite its smaller size, Pluto remains one of the most fascinating worlds in the Solar System. Its surface consists of frozen nitrogen, methane, and water ice, while the famous heart-shaped region called Tombaugh Regio became iconic after NASA's New Horizons spacecraft flew past Pluto in 2015. Pluto has mountains made of water ice, seasonal atmospheric changes, and evidence suggesting a possible underground ocean beneath its frozen crust. It follows a highly elliptical orbit that takes about 248 Earth years to complete. Pluto has 5 known moons: Charon, Nix, Hydra, Kerberos, and Styx. Charon is so large relative to Pluto that the two bodies are often described as a binary dwarf planet system.", videoFile: "videos/pluto.mp4", tone: "Dwarf Planet" }
             ];
 
             var form = document.getElementById("solarCalcForm");
@@ -633,19 +1216,12 @@
             var panelRoot = document.getElementById("planetPanels");
 
             function formatNumber(value, digits) {
-                if (typeof digits === "undefined") {
-                    digits = 2;
-                }
-
-                return Number(value).toLocaleString(undefined, {
-                    minimumFractionDigits: digits,
-                    maximumFractionDigits: digits
-                });
+                if (typeof digits === "undefined") digits = 2;
+                return Number(value).toLocaleString(undefined, { minimumFractionDigits: digits, maximumFractionDigits: digits });
             }
 
             function renderPanels() {
                 var earthYears = Math.max(0, parseFloat(input.value) || 0);
-
                 panelRoot.innerHTML = orbitalData.map(function (planet, index) {
                     var planetYears = earthYears * 365.25 / planet.periodDays;
                     var revolutions = planetYears;
@@ -660,22 +1236,10 @@
                         '</div>' +
                         '<div class="planet-card__body">' +
                         '<div class="planet-stats">' +
-                        '<div class="stat-pill">' +
-                        '<span>Age on planet</span>' +
-                        '<strong>' + formatNumber(planetYears) + ' years</strong>' +
-                        '</div>' +
-                        '<div class="stat-pill">' +
-                        '<span>Revolutions</span>' +
-                        '<strong>' + formatNumber(revolutions) + ' turns</strong>' +
-                        '</div>' +
-                        '<div class="stat-pill">' +
-                        '<span>Orbital period</span>' +
-                        '<strong>' + formatNumber(planet.periodDays, planet.periodDays < 10 ? 2 : 0) + ' Earth days</strong>' +
-                        '</div>' +
-                        '<div class="stat-pill">' +
-                        '<span>Distance from Sun</span>' +
-                        '<strong>' + formatNumber(planet.distanceMillionKm, 1) + ' million km</strong>' +
-                        '</div>' +
+                        '<div class="stat-pill"><span>Age on planet</span><strong>' + formatNumber(planetYears) + ' years</strong></div>' +
+                        '<div class="stat-pill"><span>Revolutions</span><strong>' + formatNumber(revolutions) + ' turns</strong></div>' +
+                        '<div class="stat-pill"><span>Orbital period</span><strong>' + formatNumber(planet.periodDays, planet.periodDays < 10 ? 2 : 0) + ' Earth days</strong></div>' +
+                        '<div class="stat-pill"><span>Distance from Sun</span><strong>' + formatNumber(planet.distanceMillionKm, 1) + ' million km</strong></div>' +
                         '</div>' +
                         '<p class="planet-description">' + planet.description + '</p>' +
                         '<div class="planet-video">' +
@@ -695,6 +1259,19 @@
 
             renderPanels();
         }
+
+        // ===== DOWNLOAD BUTTON =====
+        document.getElementById("downloadScriptBtn").addEventListener("click", function () {
+            var blob = new Blob([SOLAR_SCRIPT_CONTENT], { type: "text/plain" });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.href = url;
+            a.download = "solar_system_blender.py";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
 
         if (document.readyState === "loading") {
             document.addEventListener("DOMContentLoaded", initSolarCalculator);
